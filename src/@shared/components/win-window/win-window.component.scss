@@ -1,0 +1,17 @@
+.window {
+  position: fixed;
+  min-width: 128px;
+  min-height: 128px;
+  .title-bar {
+    cursor: move;
+  }
+}
+.resizable {
+  resize: both;
+  overflow: auto;
+}
+
+.maximize {
+  min-width: 100%;
+  min-height: 100%;
+}

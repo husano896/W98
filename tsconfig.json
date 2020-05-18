@@ -16,6 +16,10 @@
       "dom"
     ]
   },
+  "paths": {
+    "@shared" : ["src/@shared"],
+    "@shared/*" : ["src/@shared/*"]
+  },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

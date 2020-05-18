@@ -1,0 +1,15 @@
+<!-- https://jdan.github.io/98.css/ -->
+<div *ngIf="alive" class="window" [ngClass]="classCallBack()"
+  [style.top.px]="css.top" [style.left.px]="css.left" >
+  <div class="title-bar" draggable="true" (dragstart)="onDragStart($event);" (dragend)="onDragEnd($event);" >
+    <div class="title-bar-text">{{title}}</div>
+    <div class="title-bar-controls">
+      <button aria-label="Minimize"></button>
+      <button aria-label="Maximize" (click)="btnMaximize()"></button>
+      <button aria-label="Close"></button>
+    </div>
+  </div>
+  <div class="window-body">
+    <ng-content></ng-content>
+  </div>
+</div>
