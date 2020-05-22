@@ -1,1 +1,18 @@
-<p>bios works!</p>
+<div>
+  <h3>Booting...</h3>
+
+  <div>Angular Version: {{stat.angularVersion}}</div>
+  <br>
+  <div>Navigator: {{stat.navigator.userAgent}} on {{stat.navigator.platform}}</div>
+  <br>
+  <div *ngIf="!bootTimeOut" fxLayout="column">
+    <div>Boot sequence interrupted.</div>
+    <div>
+      <span class="selected">
+        Press F2 to resume.
+      </span>
+    </div>
+  </div>
+
+  <span class="blink">_</span>
+</div>

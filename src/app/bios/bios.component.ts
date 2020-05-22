@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, VERSION, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 
+interface Statistics {
+  angularVersion: string;
+  navigator: Navigator;
+}
 @Component({
   selector: 'app-bios',
   templateUrl: './bios.component.html',
@@ -7,9 +12,42 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BIOSComponent implements OnInit {
 
-  constructor() { }
+  stat: Statistics;
 
-  ngOnInit(): void {
+  bootTimeOut: NodeJS.Timeout;
+  constructor(private router: Router, private changeDetectionRef: ChangeDetectorRef) {
+    // 拿數據時間
+    this.stat = {
+      angularVersion: VERSION.full,
+      navigator
+    };
+  }
+  ngOnInit() {
+    this.bootTimeOut = setTimeout(() => {
+      this.Boot();
+    }, 5000);
   }
 
+  Boot() {
+    this.router.navigate(['/explorer']);
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown($event: KeyboardEvent) {
+    console.log($event);
+    // 按下Esc中斷時
+    if ($event.key === 'Escape') {
+      if (this.bootTimeOut) {
+        clearTimeout(this.bootTimeOut);
+        this.bootTimeOut = null;
+      }
+    }
+    // 按下F2恢復時
+    if ($event.key === 'F2') {
+      if (!this.bootTimeOut) {
+        this.changeDetectionRef.detach();
+        location.reload();
+      }
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { element } from 'protractor';
 import {
   Component, OnInit, ChangeDetectionStrategy, Input, Directive, Output, AfterViewInit,
-  HostListener, ElementRef, EventEmitter, ViewChild
+  HostListener, ElementRef, EventEmitter, ViewChild, ChangeDetectorRef
 } from '@angular/core';
 import { NgStyle } from '@angular/common';
 
@@ -75,7 +75,10 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   css = { top: 0, left: 0 };
 
   private dragStartPos = { x: 0, y: 0 };
-  constructor(private el: ElementRef) { }
+
+  closing = false;
+
+  constructor(private el: ElementRef, private changeDetectionRef: ChangeDetectorRef) { }
   ngAfterViewInit(): void { }
 
   ngOnInit(): void { }
@@ -102,12 +105,21 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 最大化按鈕
   btnMaximize() {
     this.maximize = !this.maximize;
-    this.css = {left: 0, top: 0};
+    this.css = { left: 0, top: 0 };
   }
   // 關閉按鈕
   btnClose() {
-    this.alive = false;
-    this.wMessage.emit({ type: 'close' });
+    if (this.closing) { return; }
+    this.closing = true;
+    this.changeDetectionRef.detectChanges();
+    // 按下關閉後就去除所有判定
+    this.changeDetectionRef.detach();
+    setTimeout(() => {
+      this.alive = false;
+      this.wMessage.emit({ type: 'close' });
+
+      this.changeDetectionRef.detectChanges();
+    }, 500);
   }
 
   // 動態CSS變更
@@ -118,7 +130,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   classCallBack() {
     return {
       resizable: this.resizable,
-      maximize: this.maximize
+      maximize: this.maximize,
+      animate__zoomIn: this.maximize,
+      animate__zoomOut: this.closing
     };
   }
 

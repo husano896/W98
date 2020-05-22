@@ -7,6 +7,9 @@ const routes: Routes = [{
 }, {
   path: 'explorer',
   loadChildren: () => import('./explorer/explorer.module').then(m => m.ExplorerModule)
+}, {
+  path: '**',
+  redirectTo: 'bios'
 }];
 
 @NgModule({
