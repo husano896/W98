@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { MaterialModule } from 'src/@shared/material.module';
+import { MomentModule } from 'ngx-moment';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { environment } from '../environments/environment';
     SharedModule,
     HttpClientModule,
     AppRoutingModule,
+    MaterialModule,
+    MomentModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],

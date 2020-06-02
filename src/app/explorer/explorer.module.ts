@@ -4,13 +4,17 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ExplorerRoutingModule } from './explorer-routing.module';
+import { AppsModule } from './apps/apps.module';
+import { MaterialModule } from '@shared/material.module';
 
 @NgModule({
   declarations: [ExplorerComponent],
   imports: [
     CommonModule,
     ExplorerRoutingModule,
-    SharedModule
+    SharedModule,
+    MaterialModule,
+    AppsModule
   ]
 })
 export class ExplorerModule { }

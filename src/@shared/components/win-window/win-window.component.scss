@@ -5,14 +5,23 @@
   .title-bar {
     cursor: move;
   }
-  animation-duration: 0.5s;
+  animation-duration: 0.25s;
+  max-width: calc(100% - 6px);
+  max-height: calc(100% - 10vh);
+
+  z-index: 10;
 }
 .resizable {
   resize: both;
   overflow: auto;
 }
-
 .maximize {
-  min-width: 100%;
-  min-height: 100%;
+  min-width: calc(100% - 6px);
+  min-height: calc(100% - 10vh);
+}
+
+mat-icon {
+  font-size: 1rem;
+  width: 1rem;
+  height: 1rem;
 }

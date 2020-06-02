@@ -69,6 +69,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 是否程式繼續運行
   @Input() alive = true;
 
+  // 程式icon
+  @Input() icon: string;
+
   // 視窗事件
   @Output() wMessage = new EventEmitter();
 
@@ -84,13 +87,12 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
 
   onDragStart(e: DragEvent) {
-    console.log(e);
+    // console.log(e);
     this.dragStartPos = { x: e.x, y: e.y };
   }
 
   onDragEnd(e: DragEvent) {
-
-    console.log(e);
+    // console.log(e);
     this.css.left += e.clientX - this.dragStartPos.x;
     this.css.top += e.clientY - this.dragStartPos.y;
     this.onResize();
@@ -107,6 +109,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     this.maximize = !this.maximize;
     this.css = { left: 0, top: 0 };
   }
+
   // 關閉按鈕
   btnClose() {
     if (this.closing) { return; }
@@ -139,7 +142,6 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResize(e?) {
     const w: HTMLBaseElement = this.el.nativeElement.children[0];
-    console.log(w);
     if (!window) {
       return;
     }

@@ -1,13 +1,14 @@
 {
-  "name": "x-fly-w98",
+  "name": "xFly-w98",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "s": "ng serve --host 0.0.0.0 --port 4201",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy --base-href=/W98/"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +26,14 @@
     "@angular/service-worker": "~9.0.6",
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^4.0.0",
+    "@types/jest": "^25.2.3",
+    "@types/lodash": "^4.14.153",
+    "@types/moment": "^2.13.0",
     "animate.css": "^4.1.0",
+    "google-spreadsheet": "^3.0.11",
+    "lodash": "^4.17.15",
+    "moment": "^2.26.0",
+    "ngx-moment": "^3.5.0",
     "rxjs": "^6.5.5",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
