@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1591092438338,
+  "timestamp": 1591154910882,
   "index": "/W98/index.html",
   "assetGroups": [
     {
@@ -8,20 +8,20 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/W98/5-es2015.bb8671209e1bc44b6e22.js",
-        "/W98/5-es5.bb8671209e1bc44b6e22.js",
-        "/W98/6-es2015.a91747609bb4f7d2ea03.js",
-        "/W98/6-es5.a91747609bb4f7d2ea03.js",
+        "/W98/5-es2015.9b8f78fb9ada4c517576.js",
+        "/W98/5-es5.9b8f78fb9ada4c517576.js",
+        "/W98/6-es2015.a37218bf31a081a24dc7.js",
+        "/W98/6-es5.a37218bf31a081a24dc7.js",
         "/W98/favicon.ico",
         "/W98/index.html",
-        "/W98/main-es2015.fb3ac2d3f92989ecbffe.js",
-        "/W98/main-es5.fb3ac2d3f92989ecbffe.js",
+        "/W98/main-es2015.4e77f9377b8f79c9d58b.js",
+        "/W98/main-es5.4e77f9377b8f79c9d58b.js",
         "/W98/manifest.webmanifest",
         "/W98/polyfills-es2015.1f913f16a2d346cc8bdc.js",
         "/W98/polyfills-es5.1a3c78b07cd6f16c6e9a.js",
-        "/W98/runtime-es2015.d72efb9eae4138e2b745.js",
-        "/W98/runtime-es5.d72efb9eae4138e2b745.js",
-        "/W98/styles.217b4cbace22e8b6aa73.css"
+        "/W98/runtime-es2015.22114fcc695ae8f4b26b.js",
+        "/W98/runtime-es5.22114fcc695ae8f4b26b.js",
+        "/W98/styles.c1005de13c4d84921451.css"
       ],
       "patterns": []
     },
@@ -50,10 +50,10 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/W98/5-es2015.bb8671209e1bc44b6e22.js": "128db6e3fb3f9dfcec7a927ce926f4fd89fa4745",
-    "/W98/5-es5.bb8671209e1bc44b6e22.js": "66daf849dafd59ee4615304af1e69eeb499ce149",
-    "/W98/6-es2015.a91747609bb4f7d2ea03.js": "7dd1fb16c14ac09418e8d2997668b6acad9961ad",
-    "/W98/6-es5.a91747609bb4f7d2ea03.js": "496029f11479e983a1c535ff7d5848a4fcdec9d8",
+    "/W98/5-es2015.9b8f78fb9ada4c517576.js": "0b805f4f702e41c43e09aa0e029ad7618c4ec97d",
+    "/W98/5-es5.9b8f78fb9ada4c517576.js": "26223b3ae0d2e403f73bf5204eeb403741ca3f25",
+    "/W98/6-es2015.a37218bf31a081a24dc7.js": "d2a8690fe9ba59c9ea9c017415e18acea82f4716",
+    "/W98/6-es5.a37218bf31a081a24dc7.js": "f0d9e785ff6edb79cf4527a03ada8e18a3e1add4",
     "/W98/PerfectDOSVGA437.f8addc081fbe64cdf27c.woff": "efe1bfc36a7cee1c9d59bbf274adf6ebc475b8ba",
     "/W98/PerfectDOSVGA437Win.63529a8a1ea7c39ed646.woff": "cfab137aa2ed0bf9f9e12fa6de7ed82d6e96c0a0",
     "/W98/assets/defaultConfig.json": "bf9fdeb7646739612a4693ff47389a39efe64edd",
@@ -69,15 +69,15 @@
     "/W98/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/W98/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/W98/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/W98/index.html": "5e831ffa1f8d410c28c5101a7e3c7553bd1ff8bc",
-    "/W98/main-es2015.fb3ac2d3f92989ecbffe.js": "2efb9ddabb25ab5f568bfdb58723353ed98ea9b3",
-    "/W98/main-es5.fb3ac2d3f92989ecbffe.js": "1b0724ee0d548bdb9f2cef7ce97096f15edbe0d2",
+    "/W98/index.html": "35e30a88da6458b4121bbf9d11f01a55c43514d2",
+    "/W98/main-es2015.4e77f9377b8f79c9d58b.js": "dce32bf372d70f02d41a562863186e5e727db4f4",
+    "/W98/main-es5.4e77f9377b8f79c9d58b.js": "0ae184afcf323e41e1599e25f83fc914ddfaca79",
     "/W98/manifest.webmanifest": "b798cf5f33c39c3b58e16fadfda78f0f26d6eff4",
     "/W98/polyfills-es2015.1f913f16a2d346cc8bdc.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
     "/W98/polyfills-es5.1a3c78b07cd6f16c6e9a.js": "87006d1f609b94ee122cc7790b1ddb5e03d8eaa6",
-    "/W98/runtime-es2015.d72efb9eae4138e2b745.js": "de1f69d0d793a7a92ef972d86e5c6755c346c901",
-    "/W98/runtime-es5.d72efb9eae4138e2b745.js": "190f2464b283846a6604d2d56314c62d23a3981f",
-    "/W98/styles.217b4cbace22e8b6aa73.css": "60499bbc4d5b5d2c09b5aea2af692ff32aaf87fd"
+    "/W98/runtime-es2015.22114fcc695ae8f4b26b.js": "abb3d8d0168252c5fc9247490dd33a0cb1ff1879",
+    "/W98/runtime-es5.22114fcc695ae8f4b26b.js": "eafa05753224a65fb6d187289dfe9c58570f4b70",
+    "/W98/styles.c1005de13c4d84921451.css": "0ea549f783283872fddaa3321918f2f1dff2980c"
   },
   "navigationUrls": [
     {
