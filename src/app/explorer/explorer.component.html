@@ -5,8 +5,9 @@ print("hello world")
   </pre>
   </app-win-window>
 -->
-  <ng-container *ngFor="let task of tasks; trackBy: taskTrackBy">
-    <app-win-window [title]="task.title" [icon]="task.icon" (wMessage)="wMessage($event, task)">
+  <ng-container *ngFor="let task of tasks">
+    <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
+      (wMessage)="wMessage($event, task)">
       <ng-container *ngComponentOutlet="task.component"></ng-container>
     </app-win-window>
   </ng-container>
@@ -23,17 +24,25 @@ print("hello world")
   <div class="task-bar bg-color" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="4px">
     <!-- 開始-->
     <div class="start" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="4px">
-      <button fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始">
+      <button fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始" [matMenuTriggerFor]="startMenu">
         <mat-icon class="_portrait-only">smartphone</mat-icon>
         <mat-icon class="_landscape-only">computer</mat-icon>
         <label>開始</label>
       </button>
+      <mat-menu #startMenu="matMenu">
+        <div [style.bottom]="'60px'">
+          <button mat-menu-item *ngFor="let i of startMenuItems" (click)="i.action()">
+            <mat-icon *ngIf="i.icon">{{i.icon}}</mat-icon>
+            <label>{{i.name}}</label>
+          </button>
+        </div>
+      </mat-menu>
       <div class="divider"></div>
     </div>
     <!-- 工作條 -->
     <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxFlex fxHide.lt-md>
       <div fxLayout="row" fxLayoutGap="4px">
-        <button *ngFor="let task of tasks" fxLayoutAlign="start center">
+        <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick(task)">
           <mat-icon *ngIf="task.icon">{{task.icon}}</mat-icon>
           <label>{{task.title}}</label>
         </button>
@@ -47,18 +56,15 @@ print("hello world")
           <mat-icon>translate</mat-icon>
         </div>
         <!-- 電池 -->
-        <div class="link" fxLayout="row" fxLayoutAlign="center center" *ngIf="battery;else batteryUnknown"
+        <div class="link" fxLayout="row" fxLayoutAlign="center center" *ngIf="battery"
           (click)="onBatteryClick()">
           <mat-icon>
             {{battery.charging ? 'battery_charging_full' : ( battery.level > 0.2 ? 'battery_std' : 'battery_alert') }}
           </mat-icon>
           <span>{{battery.level*100}}%</span>
         </div>
-
       </div>
-      <ng-template #batteryUnknown>
-        <mat-icon>battery_unknown</mat-icon>
-      </ng-template>
+
       <div class="link" (click)="onDateClick()">{{getTimeNow() | amDateFormat: 'A h:mm'}}</div>
     </div>
   </div>

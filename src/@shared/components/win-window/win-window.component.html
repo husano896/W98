@@ -1,15 +1,14 @@
 <!-- https://jdan.github.io/98.css/ -->
 <div *ngIf="alive" class="window animate__animated animate__fadeIn
-" [ngClass]="classCallBack()"
-  [style.top.px]="css.top" [style.left.px]="css.left">
-  <div class="title-bar" draggable="true" (dragstart)="onDragStart($event);" (dragend)="onDragEnd($event);" >
+" [ngClass]="classCallBack()" [style.top.px]="css.top" [style.left.px]="css.left">
+  <div class="title-bar" draggable="true" (dragstart)="onDragStart($event);" (dragend)="onDragEnd($event);">
     <div class="title-bar-text" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
       <mat-icon *ngIf="icon">{{icon}}</mat-icon>
       <span>{{title}}</span>
     </div>
     <div class="title-bar-controls">
-      <button aria-label="Minimize"></button>
-      <button aria-label="Maximize" (click)="btnMaximize()"></button>
+      <button aria-label="Minimize" (click)="btnMinimize()"></button>
+      <button [attr.aria-label]=" maximize ? 'Restore': 'Maximize'" (click)="btnMaximize()"></button>
       <button aria-label="Close" (click)="btnClose()"></button>
     </div>
   </div>

@@ -63,6 +63,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 最大化
   @Input() maximize = false;
 
+  // 最小化
+  @Input() minimize = false;
+
   // 視窗標題
   @Input() title = 'Default title';
 
@@ -100,13 +103,14 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
 
   // 縮小按鈕
   btnMinimize() {
-    this.alive = false;
-    this.wMessage.emit({ type: 'close' });
+    this.wMessage.emit({ type: 'minimize' });
+    this.minimize = !this.minimize;
   }
 
   // 最大化按鈕
   btnMaximize() {
     this.maximize = !this.maximize;
+    this.wMessage.emit({ type: 'maximize' });
     this.css = { left: 0, top: 0 };
   }
 
@@ -134,6 +138,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     return {
       resizable: this.resizable,
       maximize: this.maximize,
+      minimize: this.minimize,
       animate__zoomIn: this.maximize,
       animate__zoomOut: this.closing
     };

@@ -29,7 +29,7 @@ export class BIOSComponent implements OnInit {
   }
 
   Boot() {
-    this.router.navigate(['/explorer']);
+    this.router.navigate(['/explorer'], {preserveQueryParams: true});
   }
 
   @HostListener('document:keydown', ['$event'])

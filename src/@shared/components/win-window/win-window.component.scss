@@ -10,6 +10,10 @@
   max-height: calc(100% - 10vh);
 
   z-index: 10;
+
+  .window-body {
+    overflow: auto;
+  }
 }
 .resizable {
   resize: both;
@@ -18,6 +22,10 @@
 .maximize {
   min-width: calc(100% - 6px);
   min-height: calc(100% - 10vh);
+}
+
+.minimize {
+  display: none;
 }
 
 mat-icon {

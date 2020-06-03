@@ -6,7 +6,7 @@
 
 .task-bar {
   bottom: 0;
-  position: absolute;
+  position: fixed;
   width: 100%;
   padding: 4px;
 
@@ -70,4 +70,8 @@ mat-icon {
 
 * {
   font-size: 2.5vh;
+}
+
+.desktop {
+  overflow: hidden;
 }
