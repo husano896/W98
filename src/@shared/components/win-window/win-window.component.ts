@@ -75,6 +75,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 程式icon
   @Input() icon: string;
 
+  // 是否為作用中視窗
+  @Input() active = true;
+
   // 視窗事件
   @Output() wMessage = new EventEmitter();
 
@@ -140,10 +143,14 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
       maximize: this.maximize,
       minimize: this.minimize,
       animate__zoomIn: this.maximize,
-      animate__zoomOut: this.closing
+      animate__zoomOut: this.closing,
+      active: !this.active
     };
   }
 
+  get Portrait() {
+    return window.innerHeight > window.innerWidth;
+  }
   @HostListener('window:resize', ['$event'])
   onResize(e?) {
     const w: HTMLBaseElement = this.el.nativeElement.children[0];
@@ -156,5 +163,13 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
 
     this.css.top = Math.max(0,
       Math.min(window.innerHeight - Number(w.offsetHeight), this.css.top));
+
+    // 手機版自動放大
+    if (this.Portrait) {
+      this.maximize = true;
+      this.minimize = false;
+      this.css.left = 0;
+      this.css.top = 0;
+    }
   }
 }

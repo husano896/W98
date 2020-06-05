@@ -14,7 +14,17 @@
   .window-body {
     overflow: auto;
   }
+
+  .active {
+    z-index: 10;
+  }
+
+  :not.active {
+    z-index: auto;
+  }
 }
+
+
 .resizable {
   resize: both;
   overflow: auto;

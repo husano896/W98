@@ -1,7 +1,8 @@
 <!-- https://jdan.github.io/98.css/ -->
 <div *ngIf="alive" class="window animate__animated animate__fadeIn
 " [ngClass]="classCallBack()" [style.top.px]="css.top" [style.left.px]="css.left">
-  <div class="title-bar" draggable="true" (dragstart)="onDragStart($event);" (dragend)="onDragEnd($event);">
+  <div class="title-bar" [ngClass]="{inactive: !active}" draggable="true" (dragstart)="onDragStart($event);"
+    (dragend)="onDragEnd($event);">
     <div class="title-bar-text" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
       <mat-icon *ngIf="icon">{{icon}}</mat-icon>
       <span>{{title}}</span>

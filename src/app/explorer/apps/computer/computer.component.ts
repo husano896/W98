@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { AppBase } from '../AppBase';
 
 @Component({
   selector: 'app-computer',
@@ -6,9 +7,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./computer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComputerComponent implements OnInit {
+export class ComputerComponent extends AppBase implements OnInit {
+  public static appName = '我的電腦';
+  public static icon = 'computer';
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
   }

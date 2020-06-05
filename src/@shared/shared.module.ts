@@ -1,8 +1,9 @@
-import { WinWindowComponent, WinWindowDirective } from './components/win-window/win-window.component';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'ngx-moment';
+import { WinWindowComponent, WinWindowDirective } from './components/win-window/win-window.component';
 import { MaterialModule } from './material.module';
 
 const components = [
@@ -13,6 +14,7 @@ const components = [
 const MODULES = [
   FlexLayoutModule,
   MomentModule,
+  FormsModule,
   MaterialModule
 ];
 @NgModule({

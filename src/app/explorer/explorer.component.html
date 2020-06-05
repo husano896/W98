@@ -7,17 +7,17 @@ print("hello world")
 -->
   <ng-container *ngFor="let task of tasks">
     <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
-      (wMessage)="wMessage($event, task)">
+      (wMessage)="wMessage($event, task)" (click)="onWindowClick($event, task)" [active]="!task.minimize && activeWindow === task">
       <ng-container *ngComponentOutlet="task.component"></ng-container>
     </app-win-window>
   </ng-container>
   <!-- 桌面圖示 -->
   <div class="apps" fxLayout="column wrap" fxLayoutAlign="start start" fxLayoutGap="32px grid">
-    <div class="link" (click)="onAppClick(app)" *ngFor="let app of desktopItems" fxLayout="column"
+    <div class="link" (click)="onAppClick($event, app)" *ngFor="let app of desktopItems" fxLayout="column"
       fxLayoutAlign="center center" fxLayoutGap="4px">
       <mat-icon *ngIf="app.icon">{{app.icon}}</mat-icon>
       <mat-icon *ngIf="app.img"><img [src]="app.img"></mat-icon>
-      <label>{{app.name}}</label>
+      <label>{{app.appName}}</label>
     </div>
   </div>
   <!-- 工作列 -->
@@ -40,9 +40,10 @@ print("hello world")
       <div class="divider"></div>
     </div>
     <!-- 工作條 -->
-    <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxFlex fxHide.lt-md>
+    <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxFlex>
       <div fxLayout="row" fxLayoutGap="4px">
-        <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick(task)">
+        <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick($event, task)"
+          [ngClass]="{'active' : !task.minimize && activeWindow === task}">
           <mat-icon *ngIf="task.icon">{{task.icon}}</mat-icon>
           <label>{{task.title}}</label>
         </button>
@@ -56,12 +57,11 @@ print("hello world")
           <mat-icon>translate</mat-icon>
         </div>
         <!-- 電池 -->
-        <div class="link" fxLayout="row" fxLayoutAlign="center center" *ngIf="battery"
-          (click)="onBatteryClick()">
+        <div class="link" fxLayout="row" fxLayoutAlign="center center" *ngIf="battery" (click)="onBatteryClick()">
           <mat-icon>
             {{battery.charging ? 'battery_charging_full' : ( battery.level > 0.2 ? 'battery_std' : 'battery_alert') }}
           </mat-icon>
-          <span>{{battery.level*100}}%</span>
+          <span>{{convertPercent(battery.level)}}%</span>
         </div>
       </div>
 

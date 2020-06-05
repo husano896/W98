@@ -2,9 +2,6 @@ import { Component, OnInit, NgZone } from '@angular/core';
 
 import { APPS } from './apps/apps.module';
 import * as _ from 'lodash';
-import { WhatToEatComponent } from './apps/what-to-eat/what-to-eat.component';
-import { AboutComponent } from './apps/about/about.component';
-import { ComputerComponent } from './apps/computer/computer.component';
 import { ActivatedRoute } from '@angular/router';
 
 interface Task {
@@ -40,23 +37,9 @@ export class ExplorerComponent implements OnInit {
   // 目前開啟的程式
   tasks: Array<Task> = [];
   pidStart = 1;
+  activeWindow: Task;
 
-  desktopItems = [{
-    name: '我的電腦',
-    img: null,
-    icon: 'computer',
-    component: ComputerComponent
-  }, {
-    name: '吃吃喝喝',
-    img: null,
-    icon: 'local_dining',
-    component: WhatToEatComponent
-  }, {
-    name: '關於',
-    img: null,
-    icon: 'help',
-    component: AboutComponent
-  }];
+  desktopItems: Array<any> = APPS;
 
   startMenuItems = [{
     name: '重新整理',
@@ -67,11 +50,10 @@ export class ExplorerComponent implements OnInit {
       window.location.reload();
     }
   }];
-  constructor(private ngZone: NgZone, private route: ActivatedRoute) {
-  }
+  constructor(private ngZone: NgZone, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    console.log(this.apps);
+    console.log('Apps', this.apps);
     this.initalizeBattery();
     this.route.queryParams.subscribe(params => {
       // 自動執行程式
@@ -81,12 +63,14 @@ export class ExplorerComponent implements OnInit {
         // 丟陣列時
         exec = _.uniq(exec);
         exec.forEach(element => {
-          this.onAppClick(this.desktopItems.find(i => i.name === element));
+          this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === element));
         });
       } else {
-        this.onAppClick(this.desktopItems.find(i => i.name === exec));
+        this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === exec));
       }
-      console.log(exec);
+      if (exec) {
+        console.log(exec);
+      }
     });
   }
 
@@ -104,6 +88,7 @@ export class ExplorerComponent implements OnInit {
       case 'close': {
         console.log(this.tasks, task);
         _.remove(this.tasks, t => t.pid === task.pid);
+        this.activeWindow = (this.tasks.length > 0) ? _.last(this.tasks) : null;
         break;
       }
       case 'maximize': {
@@ -120,21 +105,27 @@ export class ExplorerComponent implements OnInit {
   getTimeNow() {
     return new Date();
   }
-
+  onWindowClick($event: Event, task?: any) {
+    this.activeWindow = task;
+    console.log('click', task);
+  }
   // 桌面圖示區
-  onAppClick(app) {
+  onAppClick($event, app) {
     if (!app) {
       return;
     }
+    $event.stopPropagation();
     console.log(app);
-    this.tasks.push({
-      title: app.name,
-      component: app.component,
+    const newTask = {
+      title: app.appName,
+      component: app,
       icon: app.icon,
       pid: this.pidStart
-    });
+    };
+    this.tasks.push(newTask);
     this.pidStart += 1;
     console.log(this.tasks);
+    this.activeWindow = newTask;
   }
 
   // 工作列點擊事件區
@@ -142,9 +133,13 @@ export class ExplorerComponent implements OnInit {
 
   }
 
-  onTaskBarTaskClick(task: Task) {
+  onTaskBarTaskClick($event, task: Task) {
     task.minimize = !task.minimize;
     console.log(this.tasks);
+    if (!task.minimize) {
+      this.activeWindow = task;
+      $event.stopPropagation();
+    }
   }
 
   onLangClick() {
@@ -162,23 +157,24 @@ export class ExplorerComponent implements OnInit {
     }
     console.log('init battery');
     return nav.getBattery().then((battery: BatteryManager) => {
-      battery.onchargingchange = this.onBatteryChange;
-      battery.onchargingtimechange = this.onBatteryChange;
-      battery.ondischargingtimechange = this.onBatteryChange;
-      battery.onlevelchange = this.onBatteryChange;
-      battery.component = this;
-      // 這邊把this嵌進去，不然等等this會被BatteryManager蓋掉
+      battery.onchargingchange = this.onBatteryChange.bind(this);
+      battery.onchargingtimechange = this.onBatteryChange.bind(this);
+      battery.ondischargingtimechange = this.onBatteryChange.bind(this);
+      battery.onlevelchange = this.onBatteryChange.bind(this);
+
       this.battery = battery;
     });
   }
   onBatteryChange($event: Event) {
     const b = $event.currentTarget as unknown as BatteryManager;
-    b.component.ngZone.run(() => {
-      b.component.battery = b;
-    });
+    this.battery = b;
   }
 
   onBatteryClick() {
     console.log(this.battery);
+  }
+
+  convertPercent(i: number) {
+    return Math.round(i * 100);
   }
 }

@@ -4,16 +4,14 @@
 </div>
 
 <ng-template #loaded>
-  <div>
-    <h4>按清單以隨機選取想吃的！</h4>
-    <a href="https://docs.google.com/spreadsheets/d/1O7ZitrKzM9nauevnNaUHCV-TEUu2zk-L_Yz-Xj1T7Vg/edit?usp=sharing" target="_blank">
-      <div fxLayout="row" fxLayoutAlign="start center">
-        <mat-icon>link</mat-icon>
-        <label>Google表單資料來源</label>
-      </div>
-    </a>
-    <ul class="tree-view" (click)="randomSelect()">
-      <li *ngFor="let f of dataList; let i = index;" [ngClass]="{'selected' : i === selectedIndex}">{{f.name}}</li>
-    </ul>
-  </div>
+
+  <h4>按清單以隨機選取想吃的！</h4>
+  <a href="https://docs.google.com/spreadsheets/d/1O7ZitrKzM9nauevnNaUHCV-TEUu2zk-L_Yz-Xj1T7Vg/edit?usp=sharing"
+    target="_blank">
+    <mat-icon>link</mat-icon>
+    <label>Google表單資料來源</label>
+  </a>
+  <ul class="tree-view" (click)="randomSelect()">
+    <li *ngFor="let f of dataList; let i = index;" [ngClass]="{'selected' : i === selectedIndex}">{{f.name}}</li>
+  </ul>
 </ng-template>
