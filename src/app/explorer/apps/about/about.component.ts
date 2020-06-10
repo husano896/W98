@@ -10,7 +10,7 @@ import { AppBase } from '../AppBase';
 export class AboutComponent extends AppBase implements OnInit {
   public static appName = '關於';
   public static icon = 'help';
-
+  public static description = '不是關羽';
   constructor() {
     super();
   }

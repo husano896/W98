@@ -6,12 +6,14 @@ import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@shared/material.module';
 import { CommonModule } from '@angular/common';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
+import { ClockComponent } from './clock/clock.component';
 
 export const APPS = [
   ComputerComponent,
   WhatToEatComponent,
   AboutComponent,
-  ControlPanelComponent
+  ControlPanelComponent,
+  ClockComponent
 ];
 
 @NgModule({

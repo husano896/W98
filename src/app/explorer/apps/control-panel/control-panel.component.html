@@ -1,9 +1,33 @@
-<div fxLayout="column">
+<div class="layout" fxLayout="column" fxLayoutAlign="space-between space-between" fxLayoutGap="8px">
 
+  <div fxLayout="column" fxLayoutGap="8px" *ngIf="config">
+    <!-- 語言-->
+    <fieldset>
+      <legend>語言</legend>
+      <select (ngModelChange)="modified = true">
+        <option>zh-TW - 中文(台灣)</option>
+      </select>
+    </fieldset>
+    <!-- 背景顏色-->
+    <fieldset>
+      <legend>佈景主題</legend>
+      <div>
+        <input type="color" id="bg" name="bg" [(ngModel)]="config.background" (ngModelChange)="modified = true">
+        <label for="bg">背景顏色</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>聲音</legend>
+      <div>
+        coming soooon (TM)
+      </div>
+    </fieldset>
+    <a (click)="default()">返回預設值</a>
+  </div>
   <!-- 確定、取消、套用 -->
   <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="8px">
     <button (click)="ok()">確定</button>
     <button (click)="cancel()">取消</button>
-    <button (click)="apply()">套用</button>
+    <button (click)="apply()"  [disabled]='!modified'>套用</button>
   </div>
 </div>

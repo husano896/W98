@@ -23,7 +23,10 @@
   button {
     width: 15vw;
     height: 7vh;
-    min-width: 180px;
+    min-width: 150px;
+    label {
+      word-break: break-all;
+    }
   }
 
   button.active {

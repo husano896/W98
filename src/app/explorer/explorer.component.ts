@@ -4,6 +4,9 @@ import { APPS, AppsModule } from './apps/apps.module';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
 import * as S from './Sounds';
+import { ExplorerConfig } from './ExplorerConfig';
+import { ExplorerService } from './explorer.service';
+import { Subscription } from 'rxjs';
 
 interface Task {
   component: any;
@@ -44,6 +47,7 @@ export class ExplorerComponent implements OnInit {
 
   desktopItems: Array<any> = APPS;
 
+  config: ExplorerConfig = new ExplorerConfig();
   startMenuItems = [{
     name: '重新整理',
     img: null,
@@ -53,13 +57,21 @@ export class ExplorerComponent implements OnInit {
       window.location.reload();
     }
   }];
-  constructor(injector: Injector, private ngZone: NgZone, private route: ActivatedRoute) {
+
+  private subscriptions: Array<Subscription> = [];
+  constructor(injector: Injector, private ngZone: NgZone, private route: ActivatedRoute, private explorerServ: ExplorerService) {
     this.appsInjector = injector;
   }
 
   ngOnInit(): void {
+    // 設定載入
+    this.LoadConfig();
     console.log('Apps', this.apps);
+
+    // 電池掛載
     this.initalizeBattery();
+
+    // 路由自動執行註冊
     this.route.queryParams.subscribe(params => {
       // 自動執行程式
       let exec = params.autoexec;
@@ -77,11 +89,37 @@ export class ExplorerComponent implements OnInit {
         console.log(exec);
       }
     });
+
+    // 監聽事件
+    this.subscriptions.push(this.explorerServ.ReloadConfig$.subscribe(() => this.LoadConfig()));
+
+    // 開機程序跑完後的結尾
     S.SndStartUp.play();
   }
 
+  LoadConfig() {
+    // 載入設定
+    const cfg = localStorage.getItem(ExplorerConfig.name);
+    if (!cfg) {
+      this.config = new ExplorerConfig();
+      localStorage.setItem(ExplorerConfig.name, JSON.stringify(this.config));
+    } else {
+      try {
+        this.config = JSON.parse(cfg);
+      } catch {
+        // 讀取失敗?
+        console.warn('讀取設定發生錯誤, 返回預設值.');
+        this.config = new ExplorerConfig();
+        localStorage.setItem(ExplorerConfig.name, JSON.stringify(this.config));
+      }
+    }
+    console.log(this.config);
+  }
+
   styleCallBack() {
-    return;
+    return {
+      'background-color': this.config.background
+    };
   }
 
   taskTrackBy(task: Task) {
@@ -108,15 +146,15 @@ export class ExplorerComponent implements OnInit {
     }
   }
 
-  appMessage($event) {
-    console.log($event);
+  appMessage($event, task) {
+    this.wMessage($event, task);
   }
+
   getTimeNow() {
     return new Date();
   }
   onWindowClick($event: Event, task?: any) {
     this.activeWindow = task;
-    console.log('click', task);
   }
   // 桌面圖示區
   onAppClick($event, app) {
@@ -124,7 +162,6 @@ export class ExplorerComponent implements OnInit {
       return;
     }
     $event.stopPropagation();
-    console.log(app);
     const newTask = {
       title: app.appName,
       component: app,

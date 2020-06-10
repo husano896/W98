@@ -15,7 +15,7 @@ export class GoogleSheetServiceService {
 
   }
 
-  Load(id: string = config.sheet_id, force?: boolean): Observable<Array<any>> {
+  Load(force?: boolean, id: string = config.sheet_id): Observable<Array<any>> {
     // 取過了就先不取了
     if (this.cacheId === id && !force) {
       return of(this.cacheData);

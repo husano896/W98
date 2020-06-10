@@ -4,18 +4,27 @@
 </div>
 
 <ng-template #loaded>
-  <div>
+  <div fxLayout="column" fxLayoutGap="8px">
     <h4>按清單以隨機選取想吃的！</h4>
-    <a href="https://docs.google.com/spreadsheets/d/1O7ZitrKzM9nauevnNaUHCV-TEUu2zk-L_Yz-Xj1T7Vg/edit?usp=sharing"
-      target="_blank">
-      <mat-icon>link</mat-icon>
-      Google表單資料來源
-    </a>
-    <ul class="tree-view">
-      <li *ngFor="let f of dataList; let i = index;" [ngClass]="{'selected' : i === selectedIndex}">{{f.name}}</li>
-    </ul>
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <a fxLayout="row" fxLayoutAlign="start center"
+        href="https://docs.google.com/spreadsheets/d/1O7ZitrKzM9nauevnNaUHCV-TEUu2zk-L_Yz-Xj1T7Vg/edit?usp=sharing"
+        target="_blank">
+        <mat-icon>link</mat-icon>
+        Google表單資料來源
+      </a>
 
-    <button (click)="randomSelect()">
+      <a fxLayout="row" fxLayoutAlign="start center" (click)="refresh()">
+        <mat-icon>refresh</mat-icon>
+        重新讀取
+      </a>
+    </div>
+    <div>
+      <ul class="tree-view">
+        <li *ngFor="let f of dataList; let i = index;" [ngClass]="{'selected' : i === selectedIndex}">{{f.name}}</li>
+      </ul>
+    </div>
+    <button fxLayout="row" fxLayoutAlign="center center" (click)="randomSelect()">
       <mat-icon>casino</mat-icon>隨機選擇
     </button>
   </div>

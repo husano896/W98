@@ -1,4 +1,4 @@
-<div class="desktop full-screen bg-green" fxLayout="column" fxFlexFill [ngStyle]="styleCallBack()">
+<div class="desktop full-screen" fxLayout="column" fxFlexFill [ngStyle]="styleCallBack()">
   <!-- <app-win-window title="test">
     <pre>
 print("hello world")
@@ -9,14 +9,19 @@ print("hello world")
     <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
       (wMessage)="wMessage($event, task)" (click)="onWindowClick($event, task)"
       [active]="!task.minimize && activeWindow === task">
-      <ng-container *ngComponentOutlet="task.component; injector: appsInjector;ngModuleFactory: appsModule">
+      <!--
+      <ng-container *ngComponentOutlet="task.component; injector: appsInjector;ngModuleFactory: appsModule" [ndcDynamicOutputs]="{appMessage: appMessage}">
       </ng-container>
+    -->
+      <ndc-dynamic [ndcDynamicComponent]="task.component" [ndcDynamicOutputs]="{
+      appMessage: { handler: appMessage.bind(this), args: ['$event', task] }
+    }"></ndc-dynamic>
     </app-win-window>
   </ng-container>
   <!-- 桌面圖示 -->
   <div class="apps" fxLayout="column wrap" fxLayoutAlign="start start" fxLayoutGap="32px grid">
     <div class="link" (click)="onAppClick($event, app)" *ngFor="let app of desktopItems" fxLayout="column"
-      fxLayoutAlign="center center" fxLayoutGap="4px">
+      fxLayoutAlign="center center" fxLayoutGap="4px" [title]="app.description">
       <mat-icon *ngIf="app.icon">{{app.icon}}</mat-icon>
       <mat-icon *ngIf="app.img"><img [src]="app.img"></mat-icon>
       <label>{{app.appName}}</label>
@@ -26,11 +31,12 @@ print("hello world")
   <div class="task-bar bg-color" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="4px">
     <!-- 開始-->
     <div class="start" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="4px">
-      <button fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始" [matMenuTriggerFor]="startMenu">
+      <button fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始">
         <mat-icon class="_portrait-only">smartphone</mat-icon>
         <mat-icon class="_landscape-only">computer</mat-icon>
-        <label>開始</label>
+        <div style="word-break: keep-all;">開始</div>
       </button>
+      <!-- [matMenuTriggerFor]="startMenu" -->
       <mat-menu #startMenu="matMenu">
         <div [style.bottom]="'60px'">
           <button mat-menu-item *ngFor="let i of startMenuItems" (click)="i.action()">
@@ -65,7 +71,7 @@ print("hello world")
         </div>
       </div>
 
-      <div class="link" (click)="onDateClick()">{{getTimeNow() | amDateFormat: 'A h:mm'}}</div>
+      <span class="link" (click)="onDateClick()">{{getTimeNow() | amDateFormat: 'Ah:mm'}}</span>
     </div>
   </div>
 </div>

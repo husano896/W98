@@ -13,6 +13,10 @@
 
   .window-body {
     overflow: auto;
+    display: block;
+    width: calc(100% - 1rem);
+    height: calc(100% - 3rem);
+
   }
 
   .active {
@@ -27,7 +31,7 @@
 
 .resizable {
   resize: both;
-  overflow: auto;
+  overflow: hidden;
 }
 .maximize {
   min-width: calc(100% - 6px);

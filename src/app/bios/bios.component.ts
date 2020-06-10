@@ -1,5 +1,6 @@
 import { Component, OnInit, VERSION, HostListener, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { SwPush, SwUpdate } from '@angular/service-worker';
 
 interface Statistics {
   angularVersion: string;
@@ -15,7 +16,7 @@ export class BIOSComponent implements OnInit {
   stat: Statistics;
 
   bootTimeOut: NodeJS.Timeout;
-  constructor(private router: Router, private changeDetectionRef: ChangeDetectorRef) {
+  constructor(private router: Router, private changeDetectionRef: ChangeDetectorRef, private swUpdate: SwUpdate) {
     // 拿數據時間
     this.stat = {
       angularVersion: VERSION.full,

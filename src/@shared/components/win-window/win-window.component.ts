@@ -93,14 +93,19 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   ngOnInit(): void { }
 
   onDragStart(e: DragEvent) {
-    // console.log(e);
-    this.dragStartPos = { x: e.x, y: e.y };
+    // console.log(e, this);
+    // this.dragStartPos = { x: e.x, y: e.y };
+    this.dragStartPos = { x: e.screenX, y: e.screenY };
+    e.dataTransfer.setData('timestamp', String(e.timeStamp));
+    e.dataTransfer.dropEffect = 'move';
   }
 
   onDragEnd(e: DragEvent) {
-    // console.log(e);
-    this.css.left += e.clientX - this.dragStartPos.x;
-    this.css.top += e.clientY - this.dragStartPos.y;
+    // console.log(e, this);
+    // this.css.left += e.clientX - this.dragStartPos.x;
+    // this.css.top += e.clientY - this.dragStartPos.y;
+    this.css.left += e.screenX - this.dragStartPos.x;
+    this.css.top += e.screenY - this.dragStartPos.y;
     this.onResize();
   }
 
@@ -164,6 +169,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     this.css.top = Math.max(0,
       Math.min(window.innerHeight - Number(w.offsetHeight), this.css.top));
 
+    console.log(this.css);
     // 手機版自動放大
     if (this.Portrait) {
       this.maximize = true;

@@ -1,6 +1,7 @@
 import { Component, OnInit, Injector } from '@angular/core';
 import { GoogleSheetServiceService } from './google-sheet-service.service';
 import { AppBase } from '../AppBase';
+import * as S from '../../Sounds';
 
 @Component({
   selector: 'app-what-to-eat',
@@ -11,7 +12,7 @@ import { AppBase } from '../AppBase';
 export class WhatToEatComponent extends AppBase implements OnInit {
   public static appName = '中午吃蛇';
   public static icon = 'local_dining';
-
+  public static description = '你要ㄘㄇ';
   protected sheetServ: GoogleSheetServiceService;
 
   dataList: Array<any>;
@@ -26,13 +27,20 @@ export class WhatToEatComponent extends AppBase implements OnInit {
     this.Load();
   }
 
-  Load() {
-    this.sheetServ.Load().toPromise().then(res => {
+  Load(f?: boolean) {
+    this.sheetServ.Load(f).toPromise().then(res => {
       this.dataList = res;
     });
   }
 
+  refresh() {
+    this.dataList = null;
+    this.Load(true);
+  }
+
   randomSelect() {
+    S.SndTada.currentTime = 0;
     this.selectedIndex = Math.floor(Math.random() * this.dataList.length);
+    S.SndTada.play();
   }
 }
