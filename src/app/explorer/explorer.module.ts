@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { ExplorerRoutingModule } from './explorer-routing.module';
 import { AppsModule } from './apps/apps.module';
 import { MaterialModule } from '@shared/material.module';
-
+import { DynamicComponentModule } from 'ng-dynamic-component';
 @NgModule({
   declarations: [ExplorerComponent],
   imports: [
@@ -14,7 +14,8 @@ import { MaterialModule } from '@shared/material.module';
     ExplorerRoutingModule,
     SharedModule,
     MaterialModule,
-    AppsModule
+    AppsModule,
+    DynamicComponentModule
   ]
 })
 export class ExplorerModule { }

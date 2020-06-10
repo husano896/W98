@@ -4,16 +4,20 @@ import { AboutComponent } from './about/about.component';
 import { ComputerComponent } from './computer/computer.component';
 import { SharedModule } from '@shared/shared.module';
 import { MaterialModule } from '@shared/material.module';
+import { CommonModule } from '@angular/common';
+import { ControlPanelComponent } from './control-panel/control-panel.component';
 
 export const APPS = [
   ComputerComponent,
   WhatToEatComponent,
   AboutComponent,
+  ControlPanelComponent
 ];
 
 @NgModule({
   declarations: APPS,
   imports: [
+    CommonModule,
     SharedModule,
     MaterialModule
   ],

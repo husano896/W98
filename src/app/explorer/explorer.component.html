@@ -7,8 +7,10 @@ print("hello world")
 -->
   <ng-container *ngFor="let task of tasks">
     <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
-      (wMessage)="wMessage($event, task)" (click)="onWindowClick($event, task)" [active]="!task.minimize && activeWindow === task">
-      <ng-container *ngComponentOutlet="task.component"></ng-container>
+      (wMessage)="wMessage($event, task)" (click)="onWindowClick($event, task)"
+      [active]="!task.minimize && activeWindow === task">
+      <ng-container *ngComponentOutlet="task.component; injector: appsInjector;ngModuleFactory: appsModule">
+      </ng-container>
     </app-win-window>
   </ng-container>
   <!-- 桌面圖示 -->
@@ -40,14 +42,12 @@ print("hello world")
       <div class="divider"></div>
     </div>
     <!-- 工作條 -->
-    <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxFlex>
-      <div fxLayout="row" fxLayoutGap="4px">
-        <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick($event, task)"
-          [ngClass]="{'active' : !task.minimize && activeWindow === task}">
-          <mat-icon *ngIf="task.icon">{{task.icon}}</mat-icon>
-          <label>{{task.title}}</label>
-        </button>
-      </div>
+    <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+      <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick($event, task)"
+        [ngClass]="{'active' : !task.minimize && activeWindow === task}">
+        <mat-icon *ngIf="task.icon">{{task.icon}}</mat-icon>
+        <label fxHide.lt-md>{{task.title}}</label>
+      </button>
     </div>
     <!-- 通知列 -->
     <div class="notification" fxLayoutAlign="end center" fxLayoutGap="4px">

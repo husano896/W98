@@ -33,6 +33,7 @@
     "google-spreadsheet": "^3.0.11",
     "lodash": "^4.17.15",
     "moment": "^2.26.0",
+    "ng-dynamic-component": "^6.1.0",
     "ngx-moment": "^3.5.0",
     "rxjs": "^6.5.5",
     "tslib": "^1.10.0",

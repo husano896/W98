@@ -1,0 +1,10 @@
+const baseHref = './assets/media';
+export const SndStartUp = new Audio(`${baseHref}/startup.wav`);
+export const SndChord = new Audio(`${baseHref}/chord.wav`);
+export const SndDing = new Audio(`${baseHref}/ding.wav`);
+export const SndLogoff = new Audio(`${baseHref}/logoff.wav`);
+export const SndNotify = new Audio(`${baseHref}/notify.wav`);
+export const SndStart = new Audio(`${baseHref}/start.wav`);
+export const SndTada = new Audio(`${baseHref}/tada.wav`);
+export const SndMinimize = new Audio(`${baseHref}/minimize.wav`);
+export const SndMaximize = new Audio(`${baseHref}/maximize.wav`);

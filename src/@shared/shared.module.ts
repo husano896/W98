@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { MomentModule } from 'ngx-moment';
 import { WinWindowComponent, WinWindowDirective } from './components/win-window/win-window.component';
 import { MaterialModule } from './material.module';
+import { DynamicComponentModule } from 'ng-dynamic-component';
 
 const components = [
   WinWindowComponent,
@@ -15,8 +16,10 @@ const MODULES = [
   FlexLayoutModule,
   MomentModule,
   FormsModule,
-  MaterialModule
+  MaterialModule,
+  DynamicComponentModule
 ];
+
 @NgModule({
   declarations: [...components],
   imports: [

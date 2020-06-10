@@ -17,10 +17,13 @@
   }
 }
 .tasks {
-  overflow-x: overlay;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
   button {
     width: 15vw;
     height: 7vh;
+    min-width: 180px;
   }
 
   button.active {

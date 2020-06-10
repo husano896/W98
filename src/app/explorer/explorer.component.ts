@@ -1,8 +1,9 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, NgModuleFactory, Compiler, Injector, ReflectiveInjector } from '@angular/core';
 
-import { APPS } from './apps/apps.module';
+import { APPS, AppsModule } from './apps/apps.module';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
+import * as S from './Sounds';
 
 interface Task {
   component: any;
@@ -31,6 +32,8 @@ interface BatteryManager {
 })
 export class ExplorerComponent implements OnInit {
 
+  appsModule: NgModuleFactory<any>;
+  appsInjector: Injector;
   apps = APPS;
 
   battery: BatteryManager;
@@ -50,7 +53,9 @@ export class ExplorerComponent implements OnInit {
       window.location.reload();
     }
   }];
-  constructor(private ngZone: NgZone, private route: ActivatedRoute) { }
+  constructor(injector: Injector, private ngZone: NgZone, private route: ActivatedRoute) {
+    this.appsInjector = injector;
+  }
 
   ngOnInit(): void {
     console.log('Apps', this.apps);
@@ -72,6 +77,7 @@ export class ExplorerComponent implements OnInit {
         console.log(exec);
       }
     });
+    S.SndStartUp.play();
   }
 
   styleCallBack() {
@@ -102,6 +108,9 @@ export class ExplorerComponent implements OnInit {
     }
   }
 
+  appMessage($event) {
+    console.log($event);
+  }
   getTimeNow() {
     return new Date();
   }
@@ -126,6 +135,7 @@ export class ExplorerComponent implements OnInit {
     this.pidStart += 1;
     console.log(this.tasks);
     this.activeWindow = newTask;
+    S.SndStart.play();
   }
 
   // 工作列點擊事件區
@@ -139,14 +149,19 @@ export class ExplorerComponent implements OnInit {
     if (!task.minimize) {
       this.activeWindow = task;
       $event.stopPropagation();
+      S.SndMaximize.play();
+    } else {
+      S.SndMinimize.play();
     }
   }
 
   onLangClick() {
+    S.SndDing.play();
     alert(navigator.language);
   }
 
   onDateClick() {
+    S.SndDing.play();
     alert(new Date());
   }
 
