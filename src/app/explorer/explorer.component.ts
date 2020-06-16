@@ -1,12 +1,13 @@
-import { Component, OnInit, NgZone, NgModuleFactory, Compiler, Injector, ReflectiveInjector } from '@angular/core';
-
-import { APPS, AppsModule } from './apps/apps.module';
-import * as _ from 'lodash';
+import { Component, OnInit, NgZone, NgModuleFactory, Injector, OnDestroy } from '@angular/core';
+import { APPS } from './apps/apps.module';
 import { ActivatedRoute } from '@angular/router';
-import * as S from './Sounds';
 import { ExplorerConfig } from './ExplorerConfig';
 import { ExplorerService } from './explorer.service';
 import { Subscription } from 'rxjs';
+import { MatIconRegistry } from '@angular/material/icon';
+import * as _ from 'lodash';
+import * as S from './Sounds';
+import { SwUpdate, SwPush } from '@angular/service-worker';
 
 interface Task {
   component: any;
@@ -15,6 +16,7 @@ interface Task {
   pid: number;
   maximize?: boolean;
   minimize?: boolean;
+  iconSet?: string;
 }
 
 interface BatteryManager {
@@ -33,12 +35,12 @@ interface BatteryManager {
   templateUrl: './explorer.component.html',
   styleUrls: ['./explorer.component.scss']
 })
-export class ExplorerComponent implements OnInit {
+export class ExplorerComponent implements OnInit, OnDestroy {
 
   appsModule: NgModuleFactory<any>;
   appsInjector: Injector;
   apps = APPS;
-
+  S = S;
   battery: BatteryManager;
   // 目前開啟的程式
   tasks: Array<Task> = [];
@@ -48,6 +50,11 @@ export class ExplorerComponent implements OnInit {
   desktopItems: Array<any> = APPS;
 
   config: ExplorerConfig = new ExplorerConfig();
+
+  // Service Worker
+  public swReady: boolean;
+  public swUpdateReady: boolean;
+  ///
   startMenuItems = [{
     name: '重新整理',
     img: null,
@@ -59,8 +66,41 @@ export class ExplorerComponent implements OnInit {
   }];
 
   private subscriptions: Array<Subscription> = [];
-  constructor(injector: Injector, private ngZone: NgZone, private route: ActivatedRoute, private explorerServ: ExplorerService) {
+  constructor(
+    injector: Injector,
+    private route: ActivatedRoute,
+    private explorerServ: ExplorerService,
+    private matIconRegistry: MatIconRegistry,
+    private swUpdate: SwUpdate) {
     this.appsInjector = injector;
+
+    // 註冊icon
+    const icons = [
+      'shell32',
+      'explorer'
+    ];
+    for (const i of icons) {
+      this.matIconRegistry.registerFontClassAlias(i, i);
+    }
+
+    // Service Worker
+    if (this.swUpdate.isEnabled) {
+
+      this.swUpdate.checkForUpdate();
+
+      // 有新版已準備好時
+      this.subscriptions.push(this.swUpdate.available.subscribe((ev) => {
+        this.swUpdateReady = true;
+      }));
+    }
+
+  }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((s) => {
+      if (s) {
+        s.unsubscribe();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -73,17 +113,19 @@ export class ExplorerComponent implements OnInit {
 
     // 路由自動執行註冊
     this.route.queryParams.subscribe(params => {
+      console.log(params);
+      console.log(this.desktopItems);
       // 自動執行程式
-      let exec = params.autoexec;
+      let exec = params.exec;
 
       if (exec instanceof Array) {
         // 丟陣列時
         exec = _.uniq(exec);
         exec.forEach(element => {
-          this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === element));
+          this.onAppClick(new Event('click'), this.desktopItems.find(i => i.name.replace('Component', '') === element));
         });
       } else {
-        this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === exec));
+        this.onAppClick(new Event('click'), this.desktopItems.find(i => i.name.replace('Component', '') === exec));
       }
       if (exec) {
         console.log(exec);
@@ -118,7 +160,9 @@ export class ExplorerComponent implements OnInit {
 
   styleCallBack() {
     return {
-      'background-color': this.config.background
+      background: this.config.background,
+      'background-image': `url(${this.config.backgroundImage})`,
+      'background-size': 'cover'
     };
   }
 
@@ -137,10 +181,12 @@ export class ExplorerComponent implements OnInit {
       }
       case 'maximize': {
         task.maximize = !task.maximize;
+        S.SndMaximize.play();
         break;
       }
       case 'minimize': {
         task.minimize = !task.minimize;
+        S.SndMinimize.play();
         break;
       }
     }
@@ -153,9 +199,10 @@ export class ExplorerComponent implements OnInit {
   getTimeNow() {
     return new Date();
   }
-  onWindowClick($event: Event, task?: any) {
+  onWindowClick(task?: any) {
     this.activeWindow = task;
   }
+
   // 桌面圖示區
   onAppClick($event, app) {
     if (!app) {
@@ -166,6 +213,7 @@ export class ExplorerComponent implements OnInit {
       title: app.appName,
       component: app,
       icon: app.icon,
+      iconSet: app.iconSet,
       pid: this.pidStart
     };
     this.tasks.push(newTask);

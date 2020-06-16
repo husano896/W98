@@ -7,13 +7,17 @@ import { MaterialModule } from '@shared/material.module';
 import { CommonModule } from '@angular/common';
 import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ClockComponent } from './clock/clock.component';
+import { NotepadComponent } from './notepad/notepad.component';
+import { MediaPlayerComponent } from './media-player/media-player.component';
 
 export const APPS = [
   ComputerComponent,
   WhatToEatComponent,
   AboutComponent,
   ControlPanelComponent,
-  ClockComponent
+  ClockComponent,
+  NotepadComponent,
+  MediaPlayerComponent
 ];
 
 @NgModule({

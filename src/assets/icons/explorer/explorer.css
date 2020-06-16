@@ -1,0 +1,50 @@
+[class^="explorer"], .explorer {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-size: contain;
+}
+
+.explorer-112 {
+  background-image: url('./112.ico');
+}
+
+.explorer-152 {
+  background-image: url('./152.ico');
+}
+
+.explorer-21 {
+  background-image: url('./21.ico');
+}
+
+.explorer-24 {
+  background-image: url('./24.ico');
+}
+
+.explorer-37 {
+  background-image: url('./37.ico');
+}
+
+.explorer-39 {
+  background-image: url('./39.ico');
+}
+
+.explorer-48 {
+  background-image: url('./48.ico');
+}
+
+.explorer-51 {
+  background-image: url('./51.ico');
+}
+
+.explorer-67 {
+  background-image: url('./67.ico');
+}
+
+.explorer-77 {
+  background-image: url('./77.ico');
+}
+
+.explorer-91 {
+  background-image: url('./91.ico');
+}

@@ -9,8 +9,9 @@ import { AppBase } from '../AppBase';
 })
 export class AboutComponent extends AppBase implements OnInit {
   public static appName = '關於';
-  public static icon = 'help';
+  public static icon = 'shell32-129';
   public static description = '不是關羽';
+  public static iconSet = 'shell32';
   constructor() {
     super();
   }

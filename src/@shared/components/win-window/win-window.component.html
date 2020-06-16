@@ -4,8 +4,9 @@
   <div class="title-bar" [ngClass]="{inactive: !active}" draggable="true" (dragstart)="onDragStart($event);"
     (dragend)="onDragEnd($event);">
     <div class="title-bar-text" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
-      <mat-icon *ngIf="icon">{{icon}}</mat-icon>
-      <span>{{title}}</span>
+      <mat-icon *ngIf="icon && !iconSet">{{icon}}</mat-icon>
+      <mat-icon *ngIf="icon && iconSet" [fontSet]="iconSet" [fontIcon]="icon"></mat-icon>
+      <span class="window-title">{{title}}</span>
     </div>
     <div class="title-bar-controls">
       <button aria-label="Minimize" (click)="btnMinimize()"></button>

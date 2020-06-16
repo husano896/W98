@@ -1,6 +1,6 @@
 :host {
-  width: inherit;
-  height: inherit;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
   iframe {
     min-width: 480px;
     min-height: 360px;

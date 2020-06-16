@@ -15,7 +15,7 @@ import { DynamicComponentModule } from 'ng-dynamic-component';
     SharedModule,
     MaterialModule,
     AppsModule,
-    DynamicComponentModule
+    DynamicComponentModule,
   ]
 })
 export class ExplorerModule { }

@@ -9,11 +9,16 @@
       </select>
     </fieldset>
     <!-- 背景顏色-->
-    <fieldset>
+    <fieldset fxLayout="column" fxLayoutGap="8px">
       <legend>佈景主題</legend>
-      <div>
-        <input type="color" id="bg" name="bg" [(ngModel)]="config.background" (ngModelChange)="modified = true">
+      <div fxLayout="row" fxLayoutGap="8px">
         <label for="bg">背景顏色</label>
+        <input type="color" id="bg" name="bg" [(ngModel)]="config.background" (ngModelChange)="modified = true">
+      </div>
+      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
+        <label for="bgimg">背景圖片網址</label>
+        <input type="text" id="bgimg" name="bgimg" [(ngModel)]="config.backgroundImage" (ngModelChange)="modified = true">
+        <a (click)="disableBgImg()">取消</a>
       </div>
     </fieldset>
     <fieldset>

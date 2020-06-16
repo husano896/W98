@@ -30,6 +30,7 @@ export class WhatToEatComponent extends AppBase implements OnInit {
   Load(f?: boolean) {
     this.sheetServ.Load(f).toPromise().then(res => {
       this.dataList = res;
+      console.log(this.dataList);
     });
   }
 
@@ -41,6 +42,8 @@ export class WhatToEatComponent extends AppBase implements OnInit {
   randomSelect() {
     S.SndTada.currentTime = 0;
     this.selectedIndex = Math.floor(Math.random() * this.dataList.length);
+    document.querySelector(`#food${this.selectedIndex}`).scrollIntoView();
+    alert(this.dataList[this.selectedIndex].name);
     S.SndTada.play();
   }
 }

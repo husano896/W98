@@ -1,0 +1,19 @@
+textarea {
+  min-width: 240px;
+  min-height: 240px;
+  height: calc(100% - 16px);
+  width: inherit;
+  resize: none;
+}
+
+:host,
+.layout {
+  width: calc(100% - 4px);
+  height: calc(100% - 16px);
+  min-width: 240px;
+  min-height: 240px;
+}
+
+a, span {
+  white-space: nowrap;
+}

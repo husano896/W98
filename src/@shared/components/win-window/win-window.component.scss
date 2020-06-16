@@ -1,22 +1,20 @@
 .window {
-  position: fixed;
-  min-width: 128px;
-  min-height: 128px;
+  position: absolute;
+  min-width: 180px;
+  min-height: 180px;
   .title-bar {
     cursor: move;
   }
   animation-duration: 0.25s;
   max-width: calc(100% - 6px);
-  max-height: calc(100% - 10vh);
-
+  max-height: calc(100% - 9vh);
   z-index: 10;
 
   .window-body {
-    overflow: auto;
-    display: block;
     width: calc(100% - 1rem);
     height: calc(100% - 3rem);
-
+    max-width: calc(100% - 1rem);
+    max-height: calc(100% - 3rem);
   }
 
   .active {
@@ -26,8 +24,12 @@
   :not.active {
     z-index: auto;
   }
-}
 
+  .window-title {
+    white-space: nowrap;
+
+  }
+}
 
 .resizable {
   resize: both;
@@ -35,7 +37,7 @@
 }
 .maximize {
   min-width: calc(100% - 6px);
-  min-height: calc(100% - 10vh);
+  min-height: calc(100% - 9vh);
 }
 
 .minimize {
@@ -46,4 +48,25 @@ mat-icon {
   font-size: 1rem;
   width: 1rem;
   height: 1rem;
+}
+
+.title-bar-controls {
+  button {
+    @media screen and (orientation: portrait) {
+      width: 1.5rem;
+      height: 1.5rem;
+      background-size: 50%;
+    }
+  }
+  button[aria-label="Restore"], button[aria-label="Maximize"],
+  button[aria-label="Close"] {
+    @media screen and (orientation: portrait) {
+      background-position: center;
+    }
+  }
+  button[aria-label="Minimize"] {
+    @media screen and (orientation: portrait) {
+      background-position: bottom 0.25rem center;
+    }
+  }
 }

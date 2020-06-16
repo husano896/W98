@@ -1,0 +1,10 @@
+<div fxLayout="column" fxLayoutGap="8px">
+  <ul class="tree-view">
+    <li [id]="'m'+i" *ngFor="let m of musics; let i = index;" [ngClass]="{'selected' : i === selectedIndex}"
+      (click)="selectAudio(m, i)">
+      {{m.name || m.path}}</li>
+  </ul>
+  <audio #audioPlayer autoplay controls>
+    <source [src]="musics[selectedIndex]?.path">
+  </audio>
+</div>

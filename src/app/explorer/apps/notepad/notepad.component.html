@@ -1,0 +1,13 @@
+<div class="layout" fxLayout="column" fxLayoutGap="8px">
+  <div fxLayout="row" fxLayoutGap="8px">
+    <input id="fileInput" type="file" accept='text/*' hidden (change)="onFileChange($event)" />
+    <a (click)="SelectFile()">開啟舊檔</a>
+    <a (click)="SaveAsFile()">儲存</a>
+    <div class="field-row" fxLayoutGap="8px">
+      <span>文字大小</span>
+      <input id="range22" [(ngModel)]="fontSize" type="range" min="8" max="96" value="14" step="2" />
+      <span>{{fontSize}}px</span>
+    </div>
+  </div>
+  <textarea [(ngModel)]="fileContent" [ngStyle]="textAreaStyle()"></textarea>
+</div>

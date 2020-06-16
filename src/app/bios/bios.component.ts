@@ -16,6 +16,8 @@ export class BIOSComponent implements OnInit {
   stat: Statistics;
 
   bootTimeOut: NodeJS.Timeout;
+
+  touchTimes = 0;
   constructor(private router: Router, private changeDetectionRef: ChangeDetectorRef, private swUpdate: SwUpdate) {
     // 拿數據時間
     this.stat = {
@@ -30,7 +32,24 @@ export class BIOSComponent implements OnInit {
   }
 
   Boot() {
-    this.router.navigate(['/explorer'], {queryParamsHandling: 'preserve'});
+    this.router.navigate(['/explorer'], { queryParamsHandling: 'preserve' });
+  }
+
+  onInterruptClick() {
+
+  }
+
+  refresh() {
+    this.changeDetectionRef.detach();
+    location.reload();
+  }
+  @HostListener('document:click', ['$event'])
+  onClick($event: MouseEvent) {
+    this.touchTimes += 1;
+    if (this.touchTimes >= 10 && this.bootTimeOut) {
+      clearTimeout(this.bootTimeOut);
+      this.bootTimeOut = null;
+    }
   }
 
   @HostListener('document:keydown', ['$event'])

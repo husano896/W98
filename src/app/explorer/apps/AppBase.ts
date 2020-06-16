@@ -13,6 +13,7 @@ interface IAppMessage {
 export class AppBase implements OnInit {
   public appName: string = typeof (this);
   public icon?: string;
+  public iconSet?: string;
   public img?: string;
   public description: string = typeof (this);
   AppMessageType = AppMessageType;

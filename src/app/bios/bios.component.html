@@ -8,9 +8,14 @@
   <div *ngIf="!bootTimeOut" fxLayout="column">
     <div>Boot sequence interrupted.</div>
     <div>
-      <span class="selected">
-        Press F2 to resume.
+      <span class="selected" (click)="refresh()">
+        Press F2 or click here to refresh.
       </span>
+    </div>
+  </div>
+  <div *ngIf="touchTimes >= 5">
+    <div *ngIf="touchTimes < 10">
+      Click {{ 10 - touchTimes}} more times to interrupt.
     </div>
   </div>
 

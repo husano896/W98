@@ -1,0 +1,15 @@
+.tree-view {
+  max-height: 25vh;
+  overflow-y: auto;
+}
+
+.selected {
+  background-color: white;
+  color:red;
+  font-weight: bold;
+}
+
+audio {
+  width: calc(100% - 16px);
+  min-width: 240px;
+}

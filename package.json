@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "s": "ng serve --host 0.0.0.0 --port 4201",
+    "s": "ng serve --host 0.0.0.0 --port 4201 --ssl=true",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -30,6 +30,7 @@
     "@types/lodash": "^4.14.153",
     "@types/moment": "^2.13.0",
     "animate.css": "^4.1.0",
+    "file-saver": "^2.0.2",
     "google-spreadsheet": "^3.0.11",
     "lodash": "^4.17.15",
     "moment": "^2.26.0",

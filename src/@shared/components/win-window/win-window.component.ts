@@ -75,6 +75,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 程式icon
   @Input() icon: string;
 
+  // 程式iconSet
+  @Input() iconSet?: string;
+
   // 是否為作用中視窗
   @Input() active = true;
 
@@ -88,7 +91,10 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   closing = false;
 
   constructor(private el: ElementRef, private changeDetectionRef: ChangeDetectorRef) { }
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {
+    console.log(this.el);
+
+  }
 
   ngOnInit(): void { }
 
@@ -117,6 +123,16 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
 
   // 最大化按鈕
   btnMaximize() {
+    // 修正未resize過放大時會沒辦法滿版的問題
+    const windowDIV = (this.el.nativeElement as HTMLElement).firstElementChild as HTMLElement;
+    if (!this.maximize) {
+      console.log(windowDIV);
+      windowDIV.style.width = `${windowDIV.offsetWidth - 6}px`;
+      windowDIV.style.height = `${windowDIV.offsetHeight - 6}px`;
+    } else {
+      windowDIV.style.width = `${windowDIV.style.width + 6}px`;
+      windowDIV.style.height = `${windowDIV.style.height + 6}px`;
+    }
     this.maximize = !this.maximize;
     this.wMessage.emit({ type: 'maximize' });
     this.css = { left: 0, top: 0 };

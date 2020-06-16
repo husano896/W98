@@ -12,9 +12,9 @@ import * as S from '../../Sounds';
 
 export class ControlPanelComponent extends AppBase implements OnInit {
   public static appName = '控制台';
-  public static icon = 'settings';
+  public static icon = 'shell32-245'; // 'settings';
   public static description = '唐鳳的秘密控制中心';
-
+  public static iconSet = 'shell32';
   modified: boolean;
 
   config: ExplorerConfig;
@@ -51,5 +51,10 @@ export class ControlPanelComponent extends AppBase implements OnInit {
     this.modified = false;
     localStorage.setItem(ExplorerConfig.name, JSON.stringify(this.config));
     this.explorerServ.ReloadConfig();
+  }
+
+  disableBgImg() {
+    this.config.backgroundImage = '';
+    this.modified = true;
   }
 }

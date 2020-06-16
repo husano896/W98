@@ -24,6 +24,7 @@ import { MomentModule } from 'ngx-moment';
     MaterialModule,
     MomentModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+
   ],
   providers: [],
   bootstrap: [AppComponent]
