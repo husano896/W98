@@ -1,11 +1,16 @@
-.tree-view {
-  max-height: 25vh;
+:host, .layout {
+  height: 100%;
+  width: 100%;
+}
+
+.play-list {
   overflow-y: auto;
+  min-height: 128px;
 }
 
 .selected {
   background-color: white;
-  color:red;
+  color: red;
   font-weight: bold;
 }
 
@@ -13,3 +18,30 @@ audio {
   width: calc(100% - 16px);
   min-width: 240px;
 }
+.jacket-container {
+  width: 100%;
+  min-width: 128px;
+  min-height: 128px;
+
+  overflow-y: auto;
+
+}
+.jacket {
+  display: block;
+  object-fit: contain;
+  width: 100%;
+  height: auto;
+  box-shadow: 0px 0px 4px black;
+  background-color: black;
+}
+
+button.active {
+  box-shadow: inset -1px -1px #ffffff, inset 1px 1px #0a0a0a,
+    inset -2px -2px #dfdfdf, inset 2px 2px #808080;
+}
+
+button {
+  min-width: fit-content;
+
+}
+

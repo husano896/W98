@@ -126,7 +126,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     // 修正未resize過放大時會沒辦法滿版的問題
     const windowDIV = (this.el.nativeElement as HTMLElement).firstElementChild as HTMLElement;
     if (!this.maximize) {
-      console.log(windowDIV);
+      // console.log(windowDIV);
       windowDIV.style.width = `${windowDIV.offsetWidth - 6}px`;
       windowDIV.style.height = `${windowDIV.offsetHeight - 6}px`;
     } else {
@@ -185,7 +185,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     this.css.top = Math.max(0,
       Math.min(window.innerHeight - Number(w.offsetHeight), this.css.top));
 
-    console.log(this.css);
+    // console.log(this.css);
     // 手機版自動放大
     if (this.Portrait) {
       this.maximize = true;

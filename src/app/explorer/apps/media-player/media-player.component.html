@@ -1,10 +1,46 @@
-<div fxLayout="column" fxLayoutGap="8px">
-  <ul class="tree-view">
-    <li [id]="'m'+i" *ngFor="let m of musics; let i = index;" [ngClass]="{'selected' : i === selectedIndex}"
-      (click)="selectAudio(m, i)">
-      {{m.name || m.path}}</li>
-  </ul>
-  <audio #audioPlayer autoplay controls>
+<div class="layout" fxLayout="column" fxLayoutGap="8px" fxLayoutAlign="space-between"l>
+  <div class="jacket-container" fxLayout="row">
+    <img #jacket class="jacket animate__animated animate__slower animate__delay-1s" fxLayoutAlign="center"
+      [src]="musics[selectedIndex]?.jacket">
+  </div>
+    <ul class="play-list tree-view">
+      <li [id]="'m'+i" *ngFor="let m of musics; let i = index;" [ngClass]="{'selected' : i === selectedIndex}"
+        (click)="selectAudio(i)">
+        {{m.name || m.path}}</li>
+    </ul>
+  <audio #audioPlayer class="audioPlayer" autoplay (timeupdate)="updateTime()" (ended)="next.click()">
     <source [src]="musics[selectedIndex]?.path">
   </audio>
+
+  <!-- 進度條-->
+  <div fxLayout="column" fxLayoutGap="16px">
+    <input id="range22" type="range" [min]="0" [max]="audioPlayer.duration" [step]="0.1"
+      [(ngModel)]="audioPlayer.currentTime" />
+
+    <!-- 目前顯示時間 -->
+    <div fxLayout="row" fxLayoutAlign="space-between">
+      <label>{{audioPlayer.currentTime}}</label>
+      <label>{{audioPlayer.duration || '--'}}</label>
+    </div>
+  </div>
+  <!-- 動作按鈕 -->
+  <div class="actions" fxLayout="row column" fxLayoutAlign="start end">
+    <button (click)="audioPlayer.play()" [disabled]="!selectedIndex" [ngClass]="{active: !audioPlayer.paused}">
+      <mat-icon>play_arrow</mat-icon>
+    </button>
+    <button (click)="audioPlayer.pause()" [disabled]="!selectedIndex"
+      [ngClass]="{active: audioPlayer.paused && audioPlayer.currentTime}">
+      <mat-icon>pause</mat-icon>
+    </button>
+    <button (click)="audioPlayer.pause(); audioPlayer.currentTime = 0" [disabled]="!selectedIndex"
+      [ngClass]="{active: audioPlayer.paused && !audioPlayer.currentTime}">
+      <mat-icon>stop</mat-icon>
+    </button>
+    <button #next (click)="selectAudio((selectedIndex+1)%musics.length)">
+      <mat-icon>skip_next</mat-icon>
+    </button>
+    <button (click)="selectAudio((selectedIndex-1+musics.length)%musics.length)">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+  </div>
 </div>

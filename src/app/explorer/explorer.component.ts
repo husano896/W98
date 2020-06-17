@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { ExplorerConfig } from './ExplorerConfig';
 import { ExplorerService } from './explorer.service';
 import { Subscription } from 'rxjs';
-import { MatIconRegistry } from '@angular/material/icon';
 import * as _ from 'lodash';
 import * as S from './Sounds';
 import { SwUpdate, SwPush } from '@angular/service-worker';
@@ -70,22 +69,13 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     injector: Injector,
     private route: ActivatedRoute,
     private explorerServ: ExplorerService,
-    private matIconRegistry: MatIconRegistry,
     private swUpdate: SwUpdate) {
     this.appsInjector = injector;
 
-    // 註冊icon
-    const icons = [
-      'shell32',
-      'explorer'
-    ];
-    for (const i of icons) {
-      this.matIconRegistry.registerFontClassAlias(i, i);
-    }
-
     // Service Worker
     if (this.swUpdate.isEnabled) {
-
+      console.log(this.swUpdate);
+      this.swReady = true;
       this.swUpdate.checkForUpdate();
 
       // 有新版已準備好時
@@ -158,6 +148,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     console.log(this.config);
   }
 
+  // 桌面樣式
   styleCallBack() {
     return {
       background: this.config.background,
@@ -173,17 +164,20 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   wMessage($event, task: Task) {
     console.log('wmessage', $event, task);
     switch ($event.type) {
+      // App關閉
       case 'close': {
         console.log(this.tasks, task);
         _.remove(this.tasks, t => t.pid === task.pid);
         this.activeWindow = (this.tasks.length > 0) ? _.last(this.tasks) : null;
         break;
       }
+      // App放大還原
       case 'maximize': {
         task.maximize = !task.maximize;
         S.SndMaximize.play();
         break;
       }
+      // App最小化
       case 'minimize': {
         task.minimize = !task.minimize;
         S.SndMinimize.play();
@@ -272,6 +266,10 @@ export class ExplorerComponent implements OnInit, OnDestroy {
 
   onBatteryClick() {
     console.log(this.battery);
+  }
+
+  onSwClick() {
+    alert('Service Worker已啟用.');
   }
 
   convertPercent(i: number) {

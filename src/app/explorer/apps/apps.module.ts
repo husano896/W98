@@ -9,6 +9,7 @@ import { ControlPanelComponent } from './control-panel/control-panel.component';
 import { ClockComponent } from './clock/clock.component';
 import { NotepadComponent } from './notepad/notepad.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
+import { XpcssComponent } from './xpcss/xpcss.component';
 
 export const APPS = [
   ComputerComponent,
@@ -17,7 +18,8 @@ export const APPS = [
   ControlPanelComponent,
   ClockComponent,
   NotepadComponent,
-  MediaPlayerComponent
+  MediaPlayerComponent,
+  XpcssComponent
 ];
 
 @NgModule({

@@ -6,8 +6,8 @@ print("hello world")
   </app-win-window>
 -->
   <ng-container *ngFor="let task of tasks">
-    <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon" [iconSet]="task.iconSet"
-      (wMessage)="wMessage($event, task)" (click)="onWindowClick(task)"
+    <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
+      [iconSet]="task.iconSet" (wMessage)="wMessage($event, task)" (click)="onWindowClick(task)"
       [active]="!task.minimize && activeWindow === task">
       <!--
       <ng-container *ngComponentOutlet="task.component; injector: appsInjector;ngModuleFactory: appsModule" [ndcDynamicOutputs]="{appMessage: appMessage}">
@@ -60,8 +60,15 @@ print("hello world")
     <div class="notification" fxLayoutAlign="end center" fxLayoutGap="4px">
       <div class="divider"></div>
       <div class="notifications" fxLayout="row" fxLayoutGap="4px">
+
+        <!-- 目前瀏覽器語言 -->
         <div class="link" fxLayout="row" (click)="onLangClick()">
           <mat-icon>translate</mat-icon>
+        </div>
+        <!-- Service Worker-->
+        <div class="link" (click)="onSwClick()">
+          <mat-icon *ngIf="swReady && !swUpdateReady" title="Service Worker已啟用.">sync_alt</mat-icon>
+          <mat-icon *ngIf="swReady && swUpdateReady" title="已準備好自動更新.">system_update_alt</mat-icon>
         </div>
         <!-- 電池 -->
         <div class="link" fxLayout="row" fxLayoutAlign="center center" *ngIf="battery" (click)="onBatteryClick()">
@@ -69,12 +76,6 @@ print("hello world")
             {{battery.charging ? 'battery_charging_full' : ( battery.level > 0.2 ? 'battery_std' : 'battery_alert') }}
           </mat-icon>
           <span>{{convertPercent(battery.level)}}%</span>
-        </div>
-
-        <!-- Service Worker-->
-        <div class="link">
-          <mat-icon *ngIf="swReady && !swUpdateReady" title="Service Worker已啟用.">sync_alt</mat-icon>
-          <mat-icon *ngIf="swReady && swUpdateReady" title="已準備好自動更新.">system_update_alt</mat-icon>
         </div>
       </div>
 
