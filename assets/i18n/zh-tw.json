@@ -7,10 +7,10 @@
   "APPS": {
     "CONTROL_PANEL": "控制台",
     "CLOCK": "時鐘",
-    "NOTEPAD" : "記事本",
+    "NOTEPAD": "記事本",
     "MYCOMPUTER": "我的電腦",
-    "ABOUT" : "關於",
+    "ABOUT": "關於",
     "WHATTOEAT": "中午吃蛇"
   },
-  "START" : "開始"
+  "START": "開始"
 }

@@ -1,16 +1,16 @@
 {
-  "_langName" : "English",
-  "CANCEL" : "Cancel",
-  "CONFIRM" : "Confirm",
-  "OK" : "OK",
+  "_langName": "English",
+  "CANCEL": "Cancel",
+  "CONFIRM": "Confirm",
+  "OK": "OK",
   "APPLY": "Apply",
-  "APPS" : {
-    "CONTROL_PANEL" : "Control Panel",
+  "APPS": {
+    "CONTROL_PANEL": "Control Panel",
     "CLOCK": "Clock",
-    "NOTEPAD" : "Notepad",
+    "NOTEPAD": "Notepad",
     "MYCOMPUTER": "My Computer",
-    "ABOUT" : "About",
+    "ABOUT": "About",
     "WHATTOEAT": "What to eat"
   },
-  "START" : "Start"
+  "START": "Start"
 }
