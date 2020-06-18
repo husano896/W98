@@ -46,21 +46,20 @@ var furBallWorld = furBallWorld || function() {
 		}
 
 		update() {
-      const scale = canvas.width / 3200;
 			this.rotate = (this.rotate + this.vecRotate) % 360;
 			this.x += this.vecX;
 			this.y += this.vecY;
 
 			// 邊界偵測
-			if ((this.x > canvas.width - this.image.width*scale*scale) && (this.vecX > 0) || (this.x < this.image.width*scale*scale && this.vecX < 0)) {
+			if ((this.x > canvas.width - this.image.width*0.25) && (this.vecX > 0) || (this.x < this.image.width*0.25 && this.vecX < 0)) {
 				this.vecX *= -1;
 			}
-			if ((this.y > canvas.height - this.image.height*scale*scale) && (this.vecY > 0) || (this.y < this.image.height*scale*scale && this.vecY < 0)) {
+			if ((this.y > canvas.height - this.image.height*0.25) && (this.vecY > 0) || (this.y < this.image.width*0.25 && this.vecY < 0)) {
 				this.vecY *= -1;
 			}
 			ctx.save();
 			// rotate the canvas to the specified degrees
-			ctx.setTransform(scale, 0, 0, scale, this.x, this.y); // sets scale and origin
+			ctx.setTransform(0.5, 0, 0, 0.5, this.x, this.y); // sets scale and origin
 			ctx.rotate(this.rotate*Math.PI/180);
 			ctx.drawImage(this.image, -this.image.width / 2, -this.image.height / 2);
 			ctx.restore();
