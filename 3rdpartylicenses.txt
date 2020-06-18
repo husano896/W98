@@ -119,6 +119,12 @@ MIT
 @angular/service-worker
 MIT
 
+@ngx-translate/core
+MIT
+
+@ngx-translate/http-loader
+MIT
+
 animate.css
 MIT
 The MIT License (MIT)
