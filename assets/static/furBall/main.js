@@ -39,8 +39,8 @@ var furBallWorld = furBallWorld || function() {
 			this.x = 0;
 			this.y = 0;
 			this.rotate = 0;
-			this.vecX = Math.floor(Math.random() * furBallSpeed);
-			this.vecY = Math.floor(Math.random() * furBallSpeed);
+			this.vecX = Math.random() * furBallSpeed;
+			this.vecY = Math.random() * furBallSpeed;
 
 			console.log('生產了一隻毛球', this);
 		}
@@ -78,9 +78,8 @@ var furBallWorld = furBallWorld || function() {
 
 	// 畫布點擊事件
 	onCanvasClick = function() {
-		console.log('click');
 		furBalls.push(new FurBall());
-		console.log(furBalls);
+		console.log('毛球數量：', furBalls.length);
 	}
 
 	initalizeImages();
