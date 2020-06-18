@@ -51,10 +51,10 @@ var furBallWorld = furBallWorld || function() {
 			this.y += this.vecY;
 
 			// 邊界偵測
-			if ((this.x > canvas.width - this.image.width*0.25) && (this.vecX > 0) || (this.x < 0 && this.vecX < 0)) {
+			if ((this.x > canvas.width - this.image.width*0.25) && (this.vecX > 0) || (this.x < this.image.width*0.25 && this.vecX < 0)) {
 				this.vecX *= -1;
 			}
-			if ((this.y > canvas.height - this.image.height*0.25) && (this.vecY > 0) || (this.y < 0 && this.vecY < 0)) {
+			if ((this.y > canvas.height - this.image.height*0.25) && (this.vecY > 0) || (this.y < this.image.width*0.25 && this.vecY < 0)) {
 				this.vecY *= -1;
 			}
 			ctx.save();
