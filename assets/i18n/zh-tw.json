@@ -12,5 +12,12 @@
     "ABOUT": "關於",
     "WHATTOEAT": "中午吃蛇"
   },
-  "START": "開始"
+  "START": "開始",
+  "RESETDEFAULTS": "返回預設值",
+  "LANGUAGE": "語言",
+  "DISPLAY": "外觀",
+  "SOUNDS": "聲音",
+  "BACKGROUNDCOLOR": "背景顏色",
+  "BACKGROUNDURL": "背景網址",
+  "THEMES" : "佈景主題"
 }

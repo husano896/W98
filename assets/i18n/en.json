@@ -12,5 +12,12 @@
     "ABOUT": "About",
     "WHATTOEAT": "What to eat"
   },
-  "START": "Start"
+  "START": "Start",
+  "RESETDEFAULTS": "Reset to defaults",
+  "LANGUAGE": "Language",
+  "DISPLAY": "Display",
+  "SOUNDS": "Sounds",
+  "BACKGROUNDCOLOR": "Background color",
+  "BACKGROUNDURL": "Background URL",
+  "THEMES" : "Themes"
 }
