@@ -20,31 +20,6 @@ var furBallWorld = furBallWorld || function () {
       this.vecRotate = Math.random() * 3 + 1;
       console.log('生產了一隻毛球', this);
     }
-
-    // 初始化毛球圖片
-    initalizeImages = function () {
-      for (const img of ['1', '2', '3', '4', '5', '6', '7', '8']) {
-        let i = new Image()
-        i.src = `./imgs/${img}.png`;
-        // 讀取完後才放入毛球陣列中
-        i.addEventListener("load", function () {
-          furBallImages.push(i);
-          console.log(`毛球 ${i.src} 讀取完畢.`);
-        }, false);
-      }
-    }
-
-    // 初始化畫布
-    initalizeCanvas = function () {
-      canvas = document.getElementById('furBallWorld');
-      if (!canvas) { console.error('找不到畫布.'); return; }
-
-      ctx = canvas.getContext('2d');
-      if (!ctx) { console.error('找不到Context.'); return; }
-
-      console.log('畫布', canvas);
-      console.log('Context', ctx);
-    }
     update() {
       this.rotate = (this.rotate + this.vecRotate) % 360;
       this.x += this.vecX;
@@ -65,6 +40,31 @@ var furBallWorld = furBallWorld || function () {
       ctx.restore();
     }
   }
+  // 初始化毛球圖片
+  initalizeImages = function () {
+    for (const img of ['1', '2', '3', '4', '5', '6', '7', '8']) {
+      let i = new Image()
+      i.src = `./imgs/${img}.png`;
+      // 讀取完後才放入毛球陣列中
+      i.addEventListener("load", function () {
+        furBallImages.push(i);
+        console.log(`毛球 ${i.src} 讀取完畢.`);
+      }, false);
+    }
+  }
+
+  // 初始化畫布
+  initalizeCanvas = function () {
+    canvas = document.getElementById('furBallWorld');
+    if (!canvas) { console.error('找不到畫布.'); return; }
+
+    ctx = canvas.getContext('2d');
+    if (!ctx) { console.error('找不到Context.'); return; }
+
+    console.log('畫布', canvas);
+    console.log('Context', ctx);
+  }
+
   // 更新畫布
   update = function () {
     canvas.width = window.innerWidth;
