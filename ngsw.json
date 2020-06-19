@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1592535588099,
+  "timestamp": 1592556111318,
   "index": "/W98/index.html",
   "assetGroups": [
     {
@@ -8,19 +8,19 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/W98/5-es2015.df4fc17eafc7930adeab.js",
-        "/W98/5-es5.df4fc17eafc7930adeab.js",
+        "/W98/5-es2015.008440e12c6a3374356d.js",
+        "/W98/5-es5.008440e12c6a3374356d.js",
         "/W98/6-es2015.340bf035708344029f6b.js",
         "/W98/6-es5.340bf035708344029f6b.js",
         "/W98/favicon.ico",
         "/W98/index.html",
-        "/W98/main-es2015.9f0acdbda0f5020cde31.js",
-        "/W98/main-es5.9f0acdbda0f5020cde31.js",
+        "/W98/main-es2015.8b594a429f9eed9eec50.js",
+        "/W98/main-es5.8b594a429f9eed9eec50.js",
         "/W98/manifest.webmanifest",
         "/W98/polyfills-es2015.1f913f16a2d346cc8bdc.js",
         "/W98/polyfills-es5.1a3c78b07cd6f16c6e9a.js",
-        "/W98/runtime-es2015.a84986e6623d090deb86.js",
-        "/W98/runtime-es5.a84986e6623d090deb86.js",
+        "/W98/runtime-es2015.dd49485dd6ba5399e894.js",
+        "/W98/runtime-es5.dd49485dd6ba5399e894.js",
         "/W98/styles.25fc933a72366f8f730d.css"
       ],
       "patterns": []
@@ -226,8 +226,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/W98/5-es2015.df4fc17eafc7930adeab.js": "f8e3fea15412dfd3d967ad3a83c24a47edcd14f1",
-    "/W98/5-es5.df4fc17eafc7930adeab.js": "e9ff0ca78940ee514a3913000f01f2a95de9bbd6",
+    "/W98/5-es2015.008440e12c6a3374356d.js": "add96fe95a607d28a1e6955af0136cb28b9d6e82",
+    "/W98/5-es5.008440e12c6a3374356d.js": "7955858779da510f16d795c6e0f06cd2fdd22f46",
     "/W98/6-es2015.340bf035708344029f6b.js": "749a5a2e3505f6753d4cbc598f682e64220ff9c3",
     "/W98/6-es5.340bf035708344029f6b.js": "252f4abd83ab79e03b485e631d110873ccdd72e4",
     "/W98/PerfectDOSVGA437.f8addc081fbe64cdf27c.woff": "efe1bfc36a7cee1c9d59bbf274adf6ebc475b8ba",
@@ -421,14 +421,14 @@
     "/W98/assets/static/furBall/index.html": "c30adcfde3548f30f73e2d892bcda23db481b4b6",
     "/W98/assets/static/furBall/main.js": "d5d3829621f27a6aa6b2d042d342f171edcae3e4",
     "/W98/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/W98/index.html": "6ccf66bab87aa5faee70d6f68bea53692c8af665",
-    "/W98/main-es2015.9f0acdbda0f5020cde31.js": "a0d45987a8280e1d4cf64d8a33fc2007d604c105",
-    "/W98/main-es5.9f0acdbda0f5020cde31.js": "15886e1d3fb1489f3683812f55aa246c14c60bde",
+    "/W98/index.html": "6c1060f12ed96f4a9e9509ad8d6873147c96075d",
+    "/W98/main-es2015.8b594a429f9eed9eec50.js": "d4a4c027d43acdb0568f974a63fbfceb925dffff",
+    "/W98/main-es5.8b594a429f9eed9eec50.js": "fccc7d8ed4804a4182f8271666e0c3512676df12",
     "/W98/manifest.webmanifest": "b798cf5f33c39c3b58e16fadfda78f0f26d6eff4",
     "/W98/polyfills-es2015.1f913f16a2d346cc8bdc.js": "72ad4ccc0a3916ae4598199447cdeadd6d380570",
     "/W98/polyfills-es5.1a3c78b07cd6f16c6e9a.js": "87006d1f609b94ee122cc7790b1ddb5e03d8eaa6",
-    "/W98/runtime-es2015.a84986e6623d090deb86.js": "792f97722ca78b727246dda8f7a5ca099557ebe5",
-    "/W98/runtime-es5.a84986e6623d090deb86.js": "7772d7f0c7c0785790d90b4e7447c714b4299cbb",
+    "/W98/runtime-es2015.dd49485dd6ba5399e894.js": "b751e005a8a1c67371ed4f4e96803d8690f793f8",
+    "/W98/runtime-es5.dd49485dd6ba5399e894.js": "e3e022a739c7360a61e7ccf02f80b5d18463d2a8",
     "/W98/styles.25fc933a72366f8f730d.css": "288077e604da158a9a44aa320a29fd65253cedb9"
   },
   "navigationUrls": [
