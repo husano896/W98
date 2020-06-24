@@ -1,10 +1,4 @@
 <div class="desktop full-screen" fxLayout="column" fxFlexFill [ngStyle]="styleCallBack()">
-  <!-- <app-win-window title="test">
-    <pre>
-print("hello world")
-  </pre>
-  </app-win-window>
--->
   <ng-container *ngFor="let task of tasks">
     <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
       [iconSet]="task.iconSet" (wMessage)="wMessage($event, task)" (click)="onWindowClick(task)"
@@ -19,12 +13,12 @@ print("hello world")
     </app-win-window>
   </ng-container>
   <!-- 桌面圖示 -->
-  <div class="apps" fxLayout="column wrap" fxLayoutAlign="start start" fxLayoutGap="32px grid">
+  <div class="apps" fxLayout="column row" fxLayoutGap="32px grid">
     <div class="link" (click)="onAppClick($event, app)" *ngFor="let app of desktopItems" fxLayout="column"
-      fxLayoutAlign="center center" fxLayoutGap="4px" [title]="app.description">
+      fxLayoutAlign="end center" fxLayoutGap="4px" [title]="app.description">
       <mat-icon *ngIf="app.icon && !app.iconSet">{{app.icon}}</mat-icon>
       <mat-icon *ngIf="app.icon && app.iconSet" [fontSet]="app.iconSet" [fontIcon]="app.icon"></mat-icon>
-      <label>{{app.appName}}</label>
+      <label>{{app.appName | translate}}</label>
     </div>
   </div>
   <!-- 工作列 -->
@@ -34,7 +28,7 @@ print("hello world")
       <button fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始">
         <mat-icon class="_portrait-only">smartphone</mat-icon>
         <mat-icon class="_landscape-only">computer</mat-icon>
-        <div style="word-break: keep-all;">開始</div>
+        <div style="word-break: keep-all;">{{'START' | translate}}</div>
       </button>
       <!-- [matMenuTriggerFor]="startMenu"
       <mat-menu #startMenu="matMenu">
@@ -48,12 +42,12 @@ print("hello world")
       <div class="divider"></div>
     </div>
     <!-- 工作條 -->
-    <div class="tasks" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+    <div class="tasks" fxLayout="row" fxLayoutGap="4px">
       <button *ngFor="let task of tasks" fxLayoutAlign="start center" (click)="onTaskBarTaskClick($event, task)"
         [ngClass]="{'active' : !task.minimize && activeWindow === task}">
         <mat-icon *ngIf="task.icon && !task.iconSet">{{task.icon}}</mat-icon>
         <mat-icon *ngIf="task.icon && task.iconSet" [fontSet]="task.iconSet" [fontIcon]="task.icon"></mat-icon>
-        <label fxHide.lt-md>{{task.title}}</label>
+        <label fxHide.lt-md>{{task.title | translate}}</label>
       </button>
     </div>
     <!-- 通知列 -->
@@ -61,10 +55,11 @@ print("hello world")
       <div class="divider"></div>
       <div class="notifications" fxLayout="row" fxLayoutGap="4px">
 
-        <!-- 目前瀏覽器語言 -->
+        <!-- 目前瀏覽器語言
         <div class="link" fxLayout="row" (click)="onLangClick()">
           <mat-icon>translate</mat-icon>
         </div>
+         -->
         <!-- Service Worker-->
         <div class="link" (click)="onSwClick()">
           <mat-icon *ngIf="swReady && !swUpdateReady" title="Service Worker已啟用.">sync_alt</mat-icon>

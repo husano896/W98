@@ -24,9 +24,18 @@
     width: 15vw;
     height: 7vh;
     min-width: 72px;
-    label {
-      word-break: break-all;
+
+    mat-icon {
+      min-height: 90%;
+      height: 90%;
+      color: #0088ff;
     }
+
+
+    label {
+      word-break: inherit;
+    }
+    overflow: hidden;
   }
 
   button.active {

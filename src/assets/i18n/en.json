@@ -1,0 +1,23 @@
+{
+  "_langName": "English",
+  "CANCEL": "Cancel",
+  "CONFIRM": "Confirm",
+  "OK": "OK",
+  "APPLY": "Apply",
+  "APPS": {
+    "CONTROL_PANEL": "Control Panel",
+    "CLOCK": "Clock",
+    "NOTEPAD": "Notepad",
+    "MYCOMPUTER": "My Computer",
+    "ABOUT": "About",
+    "WHATTOEAT": "What to eat"
+  },
+  "START": "Start",
+  "RESETDEFAULTS": "Reset to defaults",
+  "LANGUAGE": "Language",
+  "DISPLAY": "Display",
+  "SOUNDS": "Sounds",
+  "BACKGROUNDCOLOR": "Background color",
+  "BACKGROUNDURL": "Background URL",
+  "THEMES" : "Themes"
+}

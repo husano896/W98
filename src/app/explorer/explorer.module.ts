@@ -7,6 +7,7 @@ import { ExplorerRoutingModule } from './explorer-routing.module';
 import { AppsModule } from './apps/apps.module';
 import { MaterialModule } from '@shared/material.module';
 import { DynamicComponentModule } from 'ng-dynamic-component';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   declarations: [ExplorerComponent],
   imports: [
@@ -16,6 +17,7 @@ import { DynamicComponentModule } from 'ng-dynamic-component';
     MaterialModule,
     AppsModule,
     DynamicComponentModule,
+    TranslateModule.forChild()
   ]
 })
 export class ExplorerModule { }

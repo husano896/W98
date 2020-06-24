@@ -112,10 +112,10 @@ export class ExplorerComponent implements OnInit, OnDestroy {
         // 丟陣列時
         exec = _.uniq(exec);
         exec.forEach(element => {
-          this.onAppClick(new Event('click'), this.desktopItems.find(i => i.name.replace('Component', '') === element));
+          this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === element));
         });
       } else {
-        this.onAppClick(new Event('click'), this.desktopItems.find(i => i.name.replace('Component', '') === exec));
+        this.onAppClick(new Event('click'), this.desktopItems.find(i => i.appName === exec));
       }
       if (exec) {
         console.log(exec);
@@ -191,6 +191,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   }
 
   getTimeNow() {
+
     return new Date();
   }
   onWindowClick(task?: any) {
@@ -201,6 +202,9 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   onAppClick($event, app) {
     if (!app) {
       return;
+    }
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.checkForUpdate();
     }
     $event.stopPropagation();
     const newTask = {

@@ -1,0 +1,10 @@
+<section *ngIf="columnQueryList?.length">
+  <menu role="tablist">
+    <button role="tab" *ngFor="let col of columnQueryList; let i = index;"
+      [attr.aria-controls]="col.columnName" (click)="activeIndex = i;">{{col.title | translate}}</button>
+  </menu>
+  <!-- the tab content -->
+  <article role="tabpanel" [id]="col.columnName" *ngFor="let col of columnQueryList; let i = index" [hidden]="i !== activeIndex">
+    <ng-container *ngTemplateOutlet="col.templateRef"></ng-container>
+  </article>
+</section>

@@ -1,38 +1,52 @@
-<div class="layout" fxLayout="column" fxLayoutAlign="space-between space-between" fxLayoutGap="8px">
-
+<div class="layout" fxLayout="column" fxLayoutAlign="space-between space-between" fxLayoutGap="8px" fxFlexFill>
   <div fxLayout="column" fxLayoutGap="8px" *ngIf="config">
-    <!-- 語言-->
-    <fieldset>
-      <legend>語言</legend>
-      <select (ngModelChange)="modified = true">
-        <option>zh-TW - 中文(台灣)</option>
-      </select>
-    </fieldset>
-    <!-- 背景顏色-->
-    <fieldset fxLayout="column" fxLayoutGap="8px">
-      <legend>佈景主題</legend>
-      <div fxLayout="row" fxLayoutGap="8px">
-        <label for="bg">背景顏色</label>
-        <input type="color" id="bg" name="bg" [(ngModel)]="config.background" (ngModelChange)="modified = true">
-      </div>
-      <div fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="start center">
-        <label for="bgimg">背景圖片網址</label>
-        <input type="text" id="bgimg" name="bgimg" [(ngModel)]="config.backgroundImage" (ngModelChange)="modified = true">
-        <a (click)="disableBgImg()">取消</a>
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>聲音</legend>
-      <div>
-        coming soooon (TM)
-      </div>
-    </fieldset>
-    <a (click)="default()">返回預設值</a>
+    <app-win-tab-group>
+      <ng-template WinTab="language" [title]="'LANGUAGE' | translate">
+        <!-- 語言-->
+        <fieldset>
+          <legend>{{'LANGUAGE' | translate}}</legend>
+          <select [(ngModel)]="lang" (ngModelChange)="modified = true">
+            <option *ngFor="let l of langs" [value]="l.name">{{l.name}} - {{l.displayName}}</option>
+          </select>
+        </fieldset>
+      </ng-template>
+      <ng-template WinTab="display" [title]="'DISPLAY' | translate">
+        <!-- 背景顏色-->
+        <fieldset fxLayout="column" fxLayoutGap="8px">
+          <legend>{{'THEMES' | translate}}</legend>
+          <div fxLayout="row" fxLayoutGap="8px">
+            <label for="bg">{{'BACKGROUNDCOLOR' | translate}}</label>
+            <input type="color" id="bg" name="bg" [(ngModel)]="config.background" (ngModelChange)="modified = true">
+          </div>
+          <div fxLayout="row column" fxLayoutGap="8px" fxLayoutAlign="start center">
+            <label for="bgimg">{{'BACKGROUNDURL' | translate}}</label>
+            <input type="text" id="bgimg" name="bgimg" [(ngModel)]="config.backgroundImage"
+              (ngModelChange)="modified = true">
+            <a (click)="disableBgImg()">{{'CANCEL' | translate}}</a>
+          </div>
+        </fieldset>
+      </ng-template>
+      <ng-template WinTab="sounds" [title]="'SOUNDS' | translate">
+        <!-- 聲音-->
+        <fieldset>
+          <legend>{{'SOUNDS' | translate}}</legend>
+          <div>
+            coming soooon (TM)
+          </div>
+        </fieldset>
+      </ng-template>
+    </app-win-tab-group>
+
+
   </div>
   <!-- 確定、取消、套用 -->
-  <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="8px">
-    <button (click)="ok()">確定</button>
-    <button (click)="cancel()">取消</button>
-    <button (click)="apply()"  [disabled]='!modified'>套用</button>
+  <div fxLayout="column" fxLayoutGap="8px">
+    <a (click)="default()" fxLayoutAlign="end">{{'RESETDEFAULTS' | translate}}</a>
+    <div fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="8px">
+      <button (click)="ok()">{{'CONFIRM' | translate}}</button>
+      <button (click)="cancel()">{{'CANCEL' | translate}}</button>
+      <button (click)="apply()" [disabled]='!modified'>{{'APPLY' | translate}}</button>
+    </div>
   </div>
+
 </div>

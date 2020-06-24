@@ -1,0 +1,15 @@
+<div fxLayout="column" fxLayoutGap="8px" fxFlexFill>
+  <div fxLayout="row" fxLayoutGap="8px">
+    <a href="https://www.facebook.com/profile.php?id=100001104348361" target="_blank">可愛的小毛球們 by 希雅思</a>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <input id="toggle" type="checkbox" [(ngModel)]="toggleDrug">
+      <label for="toggle">Toggle Drug</label>
+    </div>
+    <div fxLayout="row" fxLayoutGap="8px">
+      <label>Interval</label>
+      <input type="range" min="1" max="10" [(ngModel)]="animSpeed" [step]="0.1" />
+    </div>
+  </div>
+
+  <iframe src="./assets/static/furBall/index.html" [ngStyle]="getStyle()" fxFlex></iframe>
+</div>

@@ -7,7 +7,7 @@ import { AppBase } from '../AppBase';
   styleUrls: ['./clock.component.scss']
 })
 export class ClockComponent extends AppBase implements OnInit, OnDestroy {
-  public static appName = '時鐘';
+  public static appName = 'APPS.CLOCK'; // '時鐘';
   public static icon = 'alarm';
   public static description = 'Tik, Thonk, Tik, Thonk';
 

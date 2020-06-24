@@ -10,6 +10,7 @@ import { ClockComponent } from './clock/clock.component';
 import { NotepadComponent } from './notepad/notepad.component';
 import { MediaPlayerComponent } from './media-player/media-player.component';
 import { XpcssComponent } from './xpcss/xpcss.component';
+import { FurballComponent } from './furball/furball.component';
 
 export const APPS = [
   ComputerComponent,
@@ -19,7 +20,8 @@ export const APPS = [
   ClockComponent,
   NotepadComponent,
   MediaPlayerComponent,
-  XpcssComponent
+  XpcssComponent,
+  FurballComponent
 ];
 
 @NgModule({

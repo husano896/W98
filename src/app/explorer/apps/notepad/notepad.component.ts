@@ -9,7 +9,7 @@ import fileSaver from 'file-saver';
 })
 export class NotepadComponent implements OnInit {
 
-  public static appName = '記事本';
+  public static appName = 'APPS.NOTEPAD'; // '記事本';
   public static icon = 'shell32-301';
   public static description = '耶，我不用買紙了！';
   public static iconSet = 'shell32';

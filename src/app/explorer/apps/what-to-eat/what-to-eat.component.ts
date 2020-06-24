@@ -10,7 +10,7 @@ import * as S from '../../Sounds';
   // 這裡不做provider作為singleton
 })
 export class WhatToEatComponent extends AppBase implements OnInit {
-  public static appName = '中午吃蛇';
+  public static appName = 'APPS.WHATTOEAT'; // '中午吃蛇';
   public static icon = 'local_dining';
   public static description = '你要ㄘㄇ';
   protected sheetServ: GoogleSheetServiceService;

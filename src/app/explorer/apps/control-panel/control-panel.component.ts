@@ -3,6 +3,7 @@ import { AppBase } from '../AppBase';
 import { ExplorerConfig } from '../../ExplorerConfig';
 import { ExplorerService } from '../../explorer.service';
 import * as S from '../../Sounds';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-control-panel',
@@ -11,16 +12,18 @@ import * as S from '../../Sounds';
 })
 
 export class ControlPanelComponent extends AppBase implements OnInit {
-  public static appName = '控制台';
+  public static appName = 'APPS.CONTROL_PANEL'; // '控制台';
   public static icon = 'shell32-245'; // 'settings';
   public static description = '唐鳳的秘密控制中心';
   public static iconSet = 'shell32';
   modified: boolean;
-
   config: ExplorerConfig;
-  constructor(private explorerServ: ExplorerService) { super(); }
+  lang: string;
+  langs: Array<{ displayName: string, name: string }>;
+  constructor(private explorerServ: ExplorerService, private translate: TranslateService) { super(); }
 
   ngOnInit(): void {
+    // 取得Explorer設定
     const cfg = localStorage.getItem(ExplorerConfig.name);
     if (!cfg) {
       this.config = new ExplorerConfig();
@@ -28,6 +31,14 @@ export class ControlPanelComponent extends AppBase implements OnInit {
     } else {
       this.config = JSON.parse(cfg);
     }
+    console.log(this.translate.currentLang, this.translate.getLangs(), this.langs, this.translate.translations);
+    // 取得語言
+    this.lang = this.translate.currentLang;
+    this.langs = this.translate.getLangs().map(
+      l => ({ displayName: this.translate.translations[l]._langName, name: l })
+    );
+
+    console.log(this.translate);
   }
 
   ok() {
@@ -50,6 +61,10 @@ export class ControlPanelComponent extends AppBase implements OnInit {
   apply() {
     this.modified = false;
     localStorage.setItem(ExplorerConfig.name, JSON.stringify(this.config));
+    // 多國語言
+    this.translate.use(this.lang);
+    localStorage.setItem('language', this.lang);
+
     this.explorerServ.ReloadConfig();
   }
 

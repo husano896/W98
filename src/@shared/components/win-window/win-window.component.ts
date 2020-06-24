@@ -165,7 +165,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
       minimize: this.minimize,
       animate__zoomIn: this.maximize,
       animate__zoomOut: this.closing,
-      active: !this.active
+      active: this.active
     };
   }
 
