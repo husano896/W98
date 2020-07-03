@@ -1,7 +1,7 @@
-<div class="desktop full-screen" fxLayout="column" fxFlexFill [ngStyle]="styleCallBack()">
+<div class="desktop full-screen" fxLayout="column" fxFlexFill [ngStyle]="styleCallBack()" (click)="onClick()">
   <ng-container *ngFor="let task of tasks">
     <app-win-window [maximize]="task.maximize" [minimize]="task.minimize" [title]="task.title" [icon]="task.icon"
-      [iconSet]="task.iconSet" (wMessage)="wMessage($event, task)" (click)="onWindowClick(task)"
+      [iconSet]="task.iconSet" (wMessage)="wMessage($event, task)" (click)="onClick();onWindowClick(task);"
       [active]="!task.minimize && activeWindow === task">
       <!--
       <ng-container *ngComponentOutlet="task.component; injector: appsInjector;ngModuleFactory: appsModule" [ndcDynamicOutputs]="{appMessage: appMessage}">
@@ -12,6 +12,13 @@
     }"></ndc-dynamic>
     </app-win-window>
   </ng-container>
+  <ng-container *ngFor="let task of dialogs">
+    <app-win-dialog [title]="task.title" [messageType]='task.type' [actions]='task.actions' [iconSet]="task.iconSet"
+      [onClose]="task.onClose" [pid]="task.pid" (wMessage)="wMessageDialog($event, task)"
+      (click)="onClick();onWindowClick(task)" [active]="activeWindow === task">
+      <span>{{task.text}}</span>
+    </app-win-dialog>
+  </ng-container>
   <!-- 桌面圖示 -->
   <div class="apps" fxLayout="column row" fxLayoutGap="32px grid">
     <div class="link" (click)="onAppClick($event, app)" *ngFor="let app of desktopItems" fxLayout="column"
@@ -21,11 +28,27 @@
       <label>{{app.appName | translate}}</label>
     </div>
   </div>
+
   <!-- 工作列 -->
   <div class="task-bar bg-color" fxLayout="row" fxLayoutAlign="space-between end" fxLayoutGap="4px">
+    <!-- 開始功能表 -->
+    <div class="window start-menu animate__animated animate__fadeInUp animate__faster" *ngIf="toggleStartMenu"
+      (click)="$event.stopPropagation()">
+      <div class="window-body" fxLayout="column" fxLayoutGap="8px">
+        <div class="item" fxLayout="row" fxLayoutGap="8px" (click)="onStartItemClick('run');">
+          <mat-icon class="item-icon">directions_run</mat-icon>
+          <p class="item-name">Run</p>
+        </div>
+        <div class="item" fxLayout="row" fxLayoutGap="8px" (click)="onStartItemClick('shutdown')">
+          <mat-icon class="item-icon">power_settings_new</mat-icon>
+          <p class="item-name">關機</p>
+        </div>
+      </div>
+    </div>
     <!-- 開始-->
     <div class="start" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="4px">
-      <button fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px" title="請按這裡以開始">
+      <button fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px" title="若要開始，請點選此處"
+        (click)="toggleStartMenu = !toggleStartMenu;$event.stopPropagation()">
         <mat-icon class="_portrait-only">smartphone</mat-icon>
         <mat-icon class="_landscape-only">computer</mat-icon>
         <div style="word-break: keep-all;">{{'START' | translate}}</div>
@@ -40,6 +63,8 @@
         </div>
       </mat-menu> -->
       <div class="divider"></div>
+      <!-- 開始列 -->
+
     </div>
     <!-- 工作條 -->
     <div class="tasks" fxLayout="row" fxLayoutGap="4px">
@@ -48,6 +73,7 @@
         <mat-icon *ngIf="task.icon && !task.iconSet">{{task.icon}}</mat-icon>
         <mat-icon *ngIf="task.icon && task.iconSet" [fontSet]="task.iconSet" [fontIcon]="task.icon"></mat-icon>
         <label fxHide.lt-md>{{task.title | translate}}</label>
+        <label>&nbsp;</label>
       </button>
     </div>
     <!-- 通知列 -->

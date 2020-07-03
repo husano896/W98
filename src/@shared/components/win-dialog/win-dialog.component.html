@@ -1,0 +1,36 @@
+<!-- https://jdan.github.io/98.css/ -->
+<div *ngIf="alive" class="window animate__animated animate__fadeIn" [ngClass]="classCallBack()" [style.top]="css.top"
+  [style.left]="css.left">
+  <!-- 標題列-->
+  <div class="title-bar" [ngClass]="{inactive: !active}" draggable="true" (dragstart)="onDragStart($event);"
+    (dragend)="onDragEnd($event);">
+    <!-- 標題文字-->
+    <div class="title-bar-text" fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="4px">
+      <span class="window-title">{{title | translate}}</span>
+    </div>
+    <!-- 右上視窗控制 -->
+    <div class="title-bar-controls">
+      <button aria-label="Close" (click)="btnClose()"></button>
+    </div>
+  </div>
+  <!-- 視窗內容 -->
+  <div class="window-body" fxLayout="column" fxLayoutGap="16px" fxLayoutAlign="center">
+    <div fxLayout="row" fxLayoutGap="16px" fxLayout="start center">
+      <mat-icon fontSet="explorer" [fontIcon]="getMessageTypeIcon()" style="width:3rem;height:3rem;"></mat-icon>
+      <div fxLayout="column" fxLayoutAlign="center">
+        <ng-content></ng-content>
+      </div>
+    </div>
+    <!-- 動作按鈕-->
+    <div fxLayout="row" fxLayoutAlign="center end" fxLayoutGap="8px">
+      <ng-container *ngIf="actions?.length;else defaultButtons">
+        <button *ngFor="let a of actions" (click)="actionClick(a)">{{a.text | translate}}</button>
+      </ng-container>
+
+      <!-- 預設按鈕-->
+      <ng-template #defaultButtons>
+        <button (click)="actionClick({text:'OK'})">{{'OK' | translate}}</button>
+      </ng-template>
+    </div>
+  </div>
+</div>

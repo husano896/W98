@@ -7,12 +7,13 @@ import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import * as S from './Sounds';
 import { SwUpdate, SwPush } from '@angular/service-worker';
+import { WinDialogService } from '@shared/components/win-dialog/win-dialog.service';
 
 interface Task {
-  component: any;
+  component?: any;
   title: string;
   icon?: string;
-  pid: number;
+  pid?: number;
   maximize?: boolean;
   minimize?: boolean;
   iconSet?: string;
@@ -43,12 +44,22 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   battery: BatteryManager;
   // 目前開啟的程式
   tasks: Array<Task> = [];
+
+  // 目前的對話視窗(不顯示在工作列)
+  get dialogs() {
+    return this.winDialogServ.Dialogs;
+  }
+
   pidStart = 1;
+
   activeWindow: Task;
 
   desktopItems: Array<any> = APPS;
 
   config: ExplorerConfig = new ExplorerConfig();
+
+  // 顯示開始功能表
+  toggleStartMenu: boolean;
 
   // Service Worker
   public swReady: boolean;
@@ -69,7 +80,8 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     injector: Injector,
     private route: ActivatedRoute,
     private explorerServ: ExplorerService,
-    private swUpdate: SwUpdate) {
+    private swUpdate: SwUpdate,
+    private winDialogServ: WinDialogService) {
     this.appsInjector = injector;
 
     // Service Worker
@@ -166,7 +178,6 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     switch ($event.type) {
       // App關閉
       case 'close': {
-        console.log(this.tasks, task);
         _.remove(this.tasks, t => t.pid === task.pid);
         this.activeWindow = (this.tasks.length > 0) ? _.last(this.tasks) : null;
         break;
@@ -184,17 +195,46 @@ export class ExplorerComponent implements OnInit, OnDestroy {
         break;
       }
     }
+    this.toggleStartMenu = false;
   }
-
+  wMessageDialog($event, task: Task) {
+    console.log('wmessage', $event, task);
+    switch ($event.type) {
+      // App關閉
+      case 'close': {
+        console.log(this.dialogs, task);
+        this.winDialogServ.Close(task.pid);
+        this.activeWindow = (this.dialogs.length > 0) ? _.last(this.dialogs) : null;
+        break;
+      }
+    }
+    this.toggleStartMenu = false;
+  }
   appMessage($event, task) {
     this.wMessage($event, task);
   }
 
   getTimeNow() {
-
     return new Date();
   }
-  onWindowClick(task?: any) {
+
+  // 點擊任何地方時
+  onClick() {
+    this.toggleStartMenu = false;
+  }
+
+  onStartItemClick(action) {
+    this.toggleStartMenu = false;
+    switch (action) {
+      case 'run':
+        this.activeWindow = this.winDialogServ.Show('Warn', 'run', 'info');
+        break;
+      case 'shutdown':
+        this.activeWindow = this.winDialogServ.Show('Shutdown', 'shutdown', 'error');
+        break;
+    }
+  }
+  onWindowClick(task?: Task) {
     this.activeWindow = task;
   }
 
@@ -218,6 +258,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     this.pidStart += 1;
     console.log(this.tasks);
     this.activeWindow = newTask;
+    this.toggleStartMenu = false;
     S.SndStart.play();
   }
 
@@ -231,7 +272,6 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     console.log(this.tasks);
     if (!task.minimize) {
       this.activeWindow = task;
-      $event.stopPropagation();
       S.SndMaximize.play();
     } else {
       S.SndMinimize.play();
@@ -248,6 +288,7 @@ export class ExplorerComponent implements OnInit, OnDestroy {
     alert(new Date());
   }
 
+  // 電池掛載
   initalizeBattery() {
     const nav: any = navigator;
     if (!nav || !nav.getBattery) {
@@ -269,10 +310,12 @@ export class ExplorerComponent implements OnInit, OnDestroy {
   }
 
   onBatteryClick() {
+    S.SndDing.play();
     console.log(this.battery);
   }
 
   onSwClick() {
+    S.SndDing.play();
     alert('Service Worker已啟用.');
   }
 

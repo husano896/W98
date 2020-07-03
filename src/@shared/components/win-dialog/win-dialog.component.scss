@@ -1,14 +1,13 @@
 .window {
   position: fixed;
-  min-width: 180px;
-  min-height: 180px;
+  min-width: 128px;
   .title-bar {
     cursor: move;
   }
   animation-duration: 0.25s;
   max-width: calc(100% - 6px);
   max-height: calc(100% - 9vh);
-  z-index: 1;
+  z-index: 100;
   .window-body {
     width: calc(100% - 1rem);
     height: calc(100% - 2.5rem);
@@ -17,19 +16,10 @@
     overflow: hidden;
   }
 
-  :not.active {
-    z-index: auto;
-  }
-
   .window-title {
     white-space: nowrap;
   }
 
-}
-
-.resizable {
-  resize: both;
-  overflow: hidden;
 }
 .maximize {
   min-width: calc(100% - 6px);
@@ -40,12 +30,6 @@
   display: none;
 }
 
-mat-icon {
-  font-size: 1rem;
-  width: 1rem;
-  height: 1rem;
-}
-
 .title-bar-controls {
   button {
     @media screen and (orientation: portrait) {
@@ -54,20 +38,13 @@ mat-icon {
       background-size: 50%;
     }
   }
-  button[aria-label="Restore"],
-  button[aria-label="Maximize"],
   button[aria-label="Close"] {
     @media screen and (orientation: portrait) {
       background-position: center;
     }
   }
-  button[aria-label="Minimize"] {
-    @media screen and (orientation: portrait) {
-      background-position: bottom 0.25rem center;
-    }
-  }
 }
 
 .active {
-  z-index: 10 !important;
+  z-index: 100000 !important;
 }

@@ -1,9 +1,7 @@
-import { element } from 'protractor';
 import {
   Component, OnInit, ChangeDetectionStrategy, Input, Directive, Output, AfterViewInit,
-  HostListener, ElementRef, EventEmitter, ViewChild, ChangeDetectorRef
+  HostListener, ElementRef, EventEmitter, ViewChild, ChangeDetectorRef, Injector
 } from '@angular/core';
-import { NgStyle } from '@angular/common';
 
 // tslint:disable-next-line: directive-selector
 @Directive({ selector: '[WinWindow]' })
@@ -57,6 +55,7 @@ export class WinWindowDirective {
 export class WinWindowComponent implements OnInit, AfterViewInit {
 
   @ViewChild('.window', { static: false }) element: ElementRef;
+
   // 是否可調整大小
   @Input() resizable = true;
 
@@ -84,34 +83,41 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   // 視窗事件
   @Output() wMessage = new EventEmitter();
 
-  css = { top: 0, left: 0 };
+  css = { top: '0px', left: '0px' };
 
+
+  // DOM層級使用
+  protected el: ElementRef;
+  protected changeDetectionRef: ChangeDetectorRef;
+
+  // 我正在關！
+  protected closing = false;
+
+  // 拖拉起始座標
   private dragStartPos = { x: 0, y: 0 };
 
-  closing = false;
-
-  constructor(private el: ElementRef, private changeDetectionRef: ChangeDetectorRef) { }
-  ngAfterViewInit(): void {
-    console.log(this.el);
-
+  constructor(injector: Injector) {
+    this.el = injector.get(ElementRef);
+    this.changeDetectionRef = injector.get(ChangeDetectorRef);
   }
+
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void { }
 
+  // 拖拉開始
   onDragStart(e: DragEvent) {
-    // console.log(e, this);
-    // this.dragStartPos = { x: e.x, y: e.y };
     this.dragStartPos = { x: e.screenX, y: e.screenY };
     e.dataTransfer.setData('timestamp', String(e.timeStamp));
     e.dataTransfer.dropEffect = 'move';
+    this.wMessage.emit({ type: 'dragStart' });
   }
 
+  // 拖拉結束
   onDragEnd(e: DragEvent) {
-    // console.log(e, this);
-    // this.css.left += e.clientX - this.dragStartPos.x;
-    // this.css.top += e.clientY - this.dragStartPos.y;
-    this.css.left += e.screenX - this.dragStartPos.x;
-    this.css.top += e.screenY - this.dragStartPos.y;
+    this.css.left = `${parseInt(this.css.left, 10) + e.screenX - this.dragStartPos.x}px`;
+    this.css.top = `${parseInt(this.css.top, 10) + e.screenY - this.dragStartPos.y}px`;
+    this.wMessage.emit({ type: 'dragEnd' });
     this.onResize();
   }
 
@@ -135,7 +141,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
     }
     this.maximize = !this.maximize;
     this.wMessage.emit({ type: 'maximize' });
-    this.css = { left: 0, top: 0 };
+    this.css = { left: '0', top: '0' };
   }
 
   // 關閉按鈕
@@ -157,8 +163,9 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   styleCallBack() {
     return this.css;
   }
+
   // 動態Class變更
-  classCallBack() {
+  classCallBack(): {} {
     return {
       resizable: this.resizable,
       maximize: this.maximize,
@@ -172,6 +179,7 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
   get Portrait() {
     return window.innerHeight > window.innerWidth;
   }
+
   @HostListener('window:resize', ['$event'])
   onResize(e?) {
     const w: HTMLBaseElement = this.el.nativeElement.children[0];
@@ -179,19 +187,19 @@ export class WinWindowComponent implements OnInit, AfterViewInit {
       return;
     }
     // 邊界偵測
-    this.css.left = Math.max(0,
-      Math.min(window.innerWidth - Number(w.offsetWidth), this.css.left));
+    this.css.left = `${Math.max(0,
+      Math.min(window.innerWidth - Number(w.offsetWidth), parseInt(this.css.left, 10)))}px`;
 
-    this.css.top = Math.max(0,
-      Math.min(window.innerHeight - Number(w.offsetHeight), this.css.top));
+    this.css.top = `${Math.max(0,
+      Math.min(window.innerHeight - Number(w.offsetHeight), parseInt(this.css.top, 10)))}px`;
 
-    // console.log(this.css);
+    console.log(this.css);
     // 手機版自動放大
     if (this.Portrait) {
       this.maximize = true;
       this.minimize = false;
-      this.css.left = 0;
-      this.css.top = 0;
+      this.css.left = `0`;
+      this.css.top = `0`;
     }
   }
 }

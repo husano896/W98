@@ -14,8 +14,8 @@
 
   <!-- 進度條-->
   <div fxLayout="column" fxLayoutGap="16px">
-    <input id="range22" type="range" [min]="0" [max]="audioPlayer.duration" [step]="0.1"
-      [(ngModel)]="audioPlayer.currentTime" />
+    <input id="range22" type="range" [min]="0" [max]="audioPlayer?.duration || 0" [step]="0.1"
+      [value]="audioPlayer?.currentTime || 0" (change)="onDurationChange($event.target.value)" />
 
     <!-- 目前顯示時間 -->
     <div fxLayout="row" fxLayoutAlign="space-between">
@@ -23,6 +23,7 @@
       <label>{{audioPlayer.duration || '--'}}</label>
     </div>
   </div>
+  <div>&nbsp;</div>
   <!-- 動作按鈕 -->
   <div class="actions" fxLayout="row column" fxLayoutAlign="start end">
     <button (click)="audioPlayer.play()" [disabled]="!selectedIndex" [ngClass]="{active: !audioPlayer.paused}">

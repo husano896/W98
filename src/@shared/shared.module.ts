@@ -7,13 +7,15 @@ import { MomentModule } from 'ngx-moment';
 import { DynamicComponentModule } from 'ng-dynamic-component';
 import { WinTabGroupComponent, WinTabDirective } from './components/win-tab-group/win-tab-group.component';
 import { WinWindowComponent, WinWindowDirective } from './components/win-window/win-window.component';
+import { WinDialogComponent } from './components/win-dialog/win-dialog.component';
 import { MaterialModule } from './material.module';
 
 const components = [
   WinWindowComponent,
   WinWindowDirective,
   WinTabGroupComponent,
-  WinTabDirective
+  WinTabDirective,
+  WinDialogComponent
 ];
 
 const MODULES = [

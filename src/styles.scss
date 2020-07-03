@@ -88,3 +88,11 @@ ndc-dynamic {
   width: inherit;
   height: inherit;
 }
+
+.dialog-disable {
+  z-index: 2;
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-color: rgba(0,0,0,0.5);
+}

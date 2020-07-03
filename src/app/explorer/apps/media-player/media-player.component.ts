@@ -15,11 +15,11 @@ export class MediaPlayerComponent extends AppBase implements OnInit, OnDestroy {
   public static description = '播放的那個三角形';
   public static iconSet = 'shell32';
 
-  private refreshInterval: NodeJS.Timeout;
   @ViewChild('audioPlayer', { static: false }) audioPlayer: ElementRef;
   @ViewChild('jacket', { static: false }) jacket: ElementRef;
   musics = Musics;
   selectedIndex: number;
+  musicReady = true;
   constructor(private changeDectetionRef: ChangeDetectorRef) { super(); }
 
   ngOnInit(): void {
@@ -28,13 +28,19 @@ export class MediaPlayerComponent extends AppBase implements OnInit, OnDestroy {
   ngOnDestroy() {
   }
 
-  selectAudio(index) {
+  onDurationChange($event) {
+    console.log($event);
+    this.audioPlayer.nativeElement.currentTime = $event;
 
+  }
+  selectAudio(index) {
+    this.musicReady = false;
     const elem = (this.audioPlayer.nativeElement as HTMLAudioElement);
     const jacket = (this.jacket.nativeElement as HTMLImageElement);
     jacket.classList.remove('animate__fadeIn');
     this.selectedIndex = index;
     elem.src = this.musics[this.selectedIndex].path;
+    // elem.onload = () => { this.musicReady = true; }
     elem.play();
 
     // 封面動畫事件

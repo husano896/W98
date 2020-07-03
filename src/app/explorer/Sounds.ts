@@ -8,3 +8,4 @@ export const SndStart = new Audio(`${baseHref}/start.mp3`);
 export const SndTada = new Audio(`${baseHref}/tada.mp3`);
 export const SndMinimize = new Audio(`${baseHref}/minimize.mp3`);
 export const SndMaximize = new Audio(`${baseHref}/maximize.mp3`);
+export const SndError = new Audio(`${baseHref}/error.mp3`);
