@@ -2,7 +2,7 @@
   width: 32px;
   height: 32px;
   display: inline-block;
-  background-size: cover;
+  background-size: contain;
 }
 
 .pifmgr-1 {
