@@ -23,5 +23,7 @@
   "THEMES" : "佈景主題",
   "SHUTDOWN_TITLE" : "關閉 Windows",
   "SHUTDOWN_CONFIRM" : "你確定要",
-  "SHUTDOWN_COMPLETE" : "您現在可以放心關機"
+  "SHUTDOWN_COMPLETE" : "您現在可以放心關機",
+  "SHUTDOWN_OPTSHUT" : "關閉這台電腦",
+  "SHUTDOWN_OPTRESTART" :"重新啟動電腦"
 }
