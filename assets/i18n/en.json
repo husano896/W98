@@ -20,5 +20,8 @@
   "SOUNDS": "Sounds",
   "BACKGROUNDCOLOR": "Background color",
   "BACKGROUNDURL": "Background URL",
-  "THEMES" : "Themes"
+  "THEMES" : "Themes",
+  "SHUTDOWN_TITLE" : "Shut Down Windows",
+  "SHUTDOWN_CONFIRM" : "What do you want the computer to do?",
+  "SHUTDOWN_COMPLETE" : "It's now safe to turn of your computer."
 }
