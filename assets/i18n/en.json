@@ -10,7 +10,8 @@
     "NOTEPAD": "Notepad",
     "MYCOMPUTER": "My Computer",
     "ABOUT": "About",
-    "WHATTOEAT": "What to eat"
+    "WHATTOEAT": "What to eat",
+    "COMMAND": "Command Line"
   },
   "START": "Start",
   "RESETDEFAULTS": "Reset to defaults",
