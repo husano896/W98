@@ -25,5 +25,18 @@
   "SHUTDOWN_CONFIRM" : "What do you want the computer to do?",
   "SHUTDOWN_COMPLETE" : "It's now safe to turn of your computer.",
   "SHUTDOWN_OPTSHUT" : "Shut down the computer?",
-  "SHUTDOWN_OPTRESTART" :"Restart the computer?"
+  "SHUTDOWN_OPTRESTART" :"Restart the computer?",
+  "SOUND" : {
+    "DEFAULT": "Default sound",
+    "STARTUP" : "System startup",
+    "ERROR": "Error",
+    "QUESTION": "Question",
+    "INFORMATION": "Information"
+  },
+  "ABOUT" : {
+    "INTRO" :{
+      "TABNAME" : "About",
+      "CONTENT" : ""
+    }
+  }
 }

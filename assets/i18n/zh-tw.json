@@ -25,5 +25,18 @@
   "SHUTDOWN_CONFIRM" : "你確定要",
   "SHUTDOWN_COMPLETE" : "您現在可以放心關機",
   "SHUTDOWN_OPTSHUT" : "關閉這台電腦",
-  "SHUTDOWN_OPTRESTART" :"重新啟動電腦"
+  "SHUTDOWN_OPTRESTART" :"重新啟動電腦",
+  "SOUND" : {
+    "DEFAULT": "預設",
+    "STARTUP" : "系統啟動",
+    "ERROR": "錯誤",
+    "QUESTION": "問號",
+    "INFORMATION": "資訊"
+  },
+  "ABOUT" : {
+    "INTRO" :{
+      "TABNAME" : "簡介",
+      "CONTENT" : ""
+    }
+  }
 }
