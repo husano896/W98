@@ -11,7 +11,8 @@
     "MYCOMPUTER": "My Computer",
     "ABOUT": "About",
     "WHATTOEAT": "What to eat",
-    "COMMAND": "Command Line"
+    "COMMAND": "Command Line",
+    "PAINT": "Paint"
   },
   "START": "Start",
   "RESETDEFAULTS": "Reset to defaults",

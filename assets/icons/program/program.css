@@ -1,0 +1,19 @@
+
+[class^="program"], .program {
+  width: 32px;
+  height: 32px;
+  display: inline-block;
+  background-size: contain;
+}
+
+.program-pbrush {
+  background-image: url('./pbrush.ico');
+}
+
+.program-paint {
+  background-image: url('./paint.ico');
+}
+
+.program-notepad {
+  background-image: url('./notepad.ico');
+}
